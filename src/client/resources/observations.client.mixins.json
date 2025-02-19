@@ -3,7 +3,6 @@
   "package": "observatory.observations.mixin",
   "compatibilityLevel": "JAVA_17",
   "client": [
-    "ClientPlayerEntityMixin",
     "accessor.ItemRendererAccessor",
     "pipobutter.BackgroundRendererMixin",
     "shiny.ClientPlayerEntityMixin",

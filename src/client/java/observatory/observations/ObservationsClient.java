@@ -16,8 +16,7 @@ public class ObservationsClient implements ClientModInitializer {
 
 	public void initKeybinds() {
 		ClientTickEvents.END_CLIENT_TICK.register(minecraftClient -> {
-			while (minecraftClient.options.jumpKey.wasPressed()) {
-				PacketByteBuf packet = PacketByteBufs.create();
+			while (minecraftClient.options.jumpKey.isPressed()) {
 				ClientPlayNetworking.send(Observations.WATER_SKIPPING_PACKET, PacketByteBufs.create());
 			}
 		});

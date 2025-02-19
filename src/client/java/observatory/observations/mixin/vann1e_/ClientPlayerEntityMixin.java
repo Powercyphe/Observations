@@ -10,10 +10,10 @@ import net.minecraft.fluid.Fluid;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.registry.tag.FluidTags;
 import net.minecraft.registry.tag.TagKey;
+import net.minecraft.util.math.MathHelper;
 import observatory.observations.component.TraitComponent;
 import observatory.observations.component.WaterSkippingComponent;
 import observatory.observations.registry.Trait;
-import observatory.observations.util.ClientPlayerEntityAccessor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -30,15 +30,6 @@ public class ClientPlayerEntityMixin extends AbstractClientPlayerEntity {
     private boolean observations$no_longer_flesh(boolean original) {
         ClientPlayerEntity player = (ClientPlayerEntity) (Object) this;
         return original && !(TraitComponent.get(player).hasTrait(Trait.NO_LONGER_FLESH) && player.isTouchingWater());
-    }
-
-    @Inject(method = "tickMovement", at = @At("TAIL"))
-    private void observations$no_longer_flesh(CallbackInfo ci) {
-        ClientPlayerEntity player = (ClientPlayerEntity) (Object) this;
-        WaterSkippingComponent waterComponent = WaterSkippingComponent.get(player);
-        if (TraitComponent.get(player).hasTrait(Trait.NO_LONGER_FLESH) && canSkipOnWater(player)) {
-            waterComponent.skipOnWater();
-        }
     }
 
     @Override
@@ -62,16 +53,7 @@ public class ClientPlayerEntityMixin extends AbstractClientPlayerEntity {
     @Override
     public boolean canWalkOnFluid(FluidState state) {
         ClientPlayerEntity player = (ClientPlayerEntity) (Object) this;
-        boolean bl = TraitComponent.get(player).hasTrait(Trait.NO_LONGER_FLESH) && canSkipOnWater(player);
+        boolean bl = TraitComponent.get(player).hasTrait(Trait.NO_LONGER_FLESH) && WaterSkippingComponent.get(player).remainingSkippingTicks > 0;
         return super.canWalkOnFluid(state) || bl;
-    }
-
-    @Unique
-    public boolean canSkipOnWater(PlayerEntity player) {
-        boolean bl = player.jumpingCooldown == 0 && player.isTouchingWater() && !player.isSubmergedInWater() && player.getFluidHeight(FluidTags.WATER) < 0.5;
-        if (player instanceof ClientPlayerEntityAccessor clientPlayer) {
-            bl = bl && clientPlayer.observations$getClient().options.jumpKey.isPressed() && (clientPlayer.input.movementForward != 0 || clientPlayer.input.movementSideways != 0);
-        }
-        return bl;
     }
 }
