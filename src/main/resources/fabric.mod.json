@@ -1,0 +1,48 @@
+{
+	"schemaVersion": 1,
+	"id": "observations",
+	"version": "${version}",
+	"name": "Observations",
+	"description": "Traits",
+	"authors": [
+		"Powercyphe",
+		"Shiny (8hiny)"
+	],
+	"custom": {
+		"cardinal-components": [
+			"observations:budding",
+			"observations:star",
+			"observations:water_skipping",
+			"observations:trait",
+			"observations:weightless"
+		]
+	},
+	"accessWidener": "observations.accesswidener",
+	"license": "CC0-1.0",
+	"icon": "assets/observations/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"observatory.observations.Observations"
+		],
+		"client": [
+			"observatory.observations.ObservationsClient"
+		],
+		"cardinal-components": [
+			"observatory.observations.registry.ModComponents"
+		]
+	},
+	"mixins": [
+		"observations.mixins.json",
+		{
+			"config": "observations.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": "*",
+		"minecraft": "~1.20.1",
+		"java": ">=17",
+		"fabric-api": "*"
+	}
+}
