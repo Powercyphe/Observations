@@ -4,6 +4,7 @@ import net.fabricmc.api.ModInitializer;
 
 import net.minecraft.util.Identifier;
 import observatory.observations.cmd.TraitCommand;
+import observatory.observations.registry.ModNetworking;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,6 +16,8 @@ public class Observations implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
+		ModNetworking.init();
+
 		TraitCommand.init();
 
 	}
