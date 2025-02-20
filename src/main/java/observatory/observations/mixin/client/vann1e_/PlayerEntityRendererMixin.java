@@ -1,4 +1,4 @@
-package observatory.observations.mixin.vann1e_;
+package observatory.observations.mixin.client.vann1e_;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -6,9 +6,9 @@ import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
-import observatory.observations.component.TraitComponent;
-import observatory.observations.registry.Trait;
-import observatory.observations.render.feature.BuddingFeatureRenderer;
+import observatory.observations.client.render.feature.BuddingFeatureRenderer;
+import observatory.observations.common.component.TraitComponent;
+import observatory.observations.common.registry.Trait;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

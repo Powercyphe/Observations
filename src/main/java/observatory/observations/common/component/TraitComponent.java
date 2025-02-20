@@ -1,4 +1,4 @@
-package observatory.observations.component;
+package observatory.observations.common.component;
 
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.component.tick.CommonTickingComponent;
@@ -7,14 +7,17 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.util.collection.DefaultedList;
-import observatory.observations.registry.ModComponents;
-import observatory.observations.registry.Trait;
+import observatory.observations.common.registry.ModComponents;
+import observatory.observations.common.registry.Trait;
 import org.jetbrains.annotations.NotNull;
 
 public class TraitComponent implements AutoSyncedComponent, CommonTickingComponent {
     private static final String TRAITS_KEY = "traits";
     private static final String TRAIT_ID_KEY = "id";
 
+    private static final int REFRESH_TICKS = 100;
+
+    private int tick = 0;
     private DefaultedList<Trait> traits;
 
     private final PlayerEntity player;
@@ -58,33 +61,34 @@ public class TraitComponent implements AutoSyncedComponent, CommonTickingCompone
     }
 
     @Override
-    public void readFromNbt(NbtCompound nbtCompound) {
-        this.traits.clear();
-        NbtList nbtList = nbtCompound.getList(TRAITS_KEY, 0);
+    public void readFromNbt(@NotNull NbtCompound nbt) {
+        clearTraits();
+        NbtList nbtList = nbt.getList(TRAITS_KEY, 10);
         for (NbtElement nbtElement : nbtList) {
             if (nbtElement instanceof NbtCompound traitNbt && traitNbt.contains(TRAIT_ID_KEY)) {
-                this.traits.add(Trait.fromString(traitNbt.getString(TRAIT_ID_KEY)));
+                addTrait(Trait.fromString(traitNbt.getString(TRAIT_ID_KEY)));
             }
         }
     }
 
     @Override
-    public void writeToNbt(NbtCompound nbtCompound) {
+    public void writeToNbt(@NotNull NbtCompound nbt) {
         NbtList nbtList = new NbtList();
-        for (Trait trait : this.traits) {
+        for (Trait trait : this.getTraits()) {
             NbtCompound traitNbt = new NbtCompound();
             traitNbt.putString(TRAIT_ID_KEY, trait.id);
             nbtList.add(traitNbt);
         }
-        nbtCompound.put(TRAITS_KEY, nbtList);
+        nbt.put(TRAITS_KEY, nbtList);
     }
 
     @Override
     public void tick() {
+        tick++;
+        if (tick > REFRESH_TICKS) {
+            tick = 0;
+            sync();
+        }
     }
 
-    @Override
-    public void clientTick() {
-
-    }
 }

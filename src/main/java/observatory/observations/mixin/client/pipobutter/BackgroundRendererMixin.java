@@ -1,4 +1,4 @@
-package observatory.observations.mixin.pipobutter;
+package observatory.observations.mixin.client.pipobutter;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.render.BackgroundRenderer;
@@ -6,10 +6,8 @@ import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.FogShape;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import observatory.observations.Observations;
-import observatory.observations.ObservationsClient;
-import observatory.observations.component.TraitComponent;
-import observatory.observations.registry.Trait;
+import observatory.observations.common.component.TraitComponent;
+import observatory.observations.common.registry.Trait;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;

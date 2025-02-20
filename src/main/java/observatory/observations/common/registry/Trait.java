@@ -1,4 +1,4 @@
-package observatory.observations.registry;
+package observatory.observations.common.registry;
 
 import org.jetbrains.annotations.Nullable;
 

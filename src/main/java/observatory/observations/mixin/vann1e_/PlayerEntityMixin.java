@@ -1,22 +1,30 @@
 package observatory.observations.mixin.vann1e_;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluid;
+import net.minecraft.fluid.FluidState;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.registry.tag.TagKey;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.World;
-import observatory.observations.component.BuddingComponent;
-import observatory.observations.component.TraitComponent;
-import observatory.observations.registry.ModComponents;
-import observatory.observations.registry.Trait;
+import observatory.observations.common.component.BuddingComponent;
+import observatory.observations.common.component.TraitComponent;
+import observatory.observations.common.component.WaterSkippingComponent;
+import observatory.observations.common.registry.ModComponents;
+import observatory.observations.common.registry.Trait;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity {
@@ -56,4 +64,22 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         return amount;
     }
 
+
+    @ModifyReturnValue(method = "shouldSwimInFluids", at = @At("RETURN"))
+    private boolean observations$no_longer_flesh(boolean original) {
+        PlayerEntity player = (PlayerEntity) (Object) this;
+        if (TraitComponent.get(player).hasTrait(Trait.NO_LONGER_FLESH) && player.isTouchingWater()) {
+            return false;
+        }
+        return original;
+    }
+
+    @Override
+    public void swimUpward(TagKey<Fluid> fluid) {
+        PlayerEntity player = (PlayerEntity) (Object) this;
+        if (TraitComponent.get(player).hasTrait(Trait.NO_LONGER_FLESH) && player.isTouchingWater()) {
+            return;
+        }
+        super.swimUpward(fluid);
+    }
 }

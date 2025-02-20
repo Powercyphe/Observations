@@ -7,4 +7,4 @@ accessible method net/minecraft/entity/LivingEntity getOffGroundSpeed ()F
 accessible method net/minecraft/entity/LivingEntity swimUpward (Lnet/minecraft/registry/tag/TagKey;)V
 accessible field net/minecraft/entity/LivingEntity jumpingCooldown I
 accessible field net/minecraft/entity/LivingEntity jumping Z
-accessible field net/minecraft/client/network/ClientPlayerEntity client Lnet/minecraft/client/MinecraftClient;
+accessible method net/minecraft/entity/LivingEntity getJumpVelocity ()F

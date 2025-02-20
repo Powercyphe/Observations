@@ -6,14 +6,13 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
-import observatory.observations.component.TraitComponent;
-import observatory.observations.registry.Trait;
+import observatory.observations.common.component.TraitComponent;
+import observatory.observations.common.registry.Trait;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
-
     public LivingEntityMixin(EntityType<?> type, World world) {
         super(type, world);
     }
@@ -25,6 +24,6 @@ public abstract class LivingEntityMixin extends Entity {
         if (entity instanceof PlayerEntity player) {
             return original && !TraitComponent.get(player).hasTrait(Trait.WEIGHTLESS);
         }
-        return original;
+        else return original;
     }
 }

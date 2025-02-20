@@ -1,11 +1,12 @@
-package observatory.observations.mixin.shiny;
+package observatory.observations.mixin.client.shiny;
+
 
 import com.mojang.authlib.GameProfile;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
-import observatory.observations.component.TraitComponent;
-import observatory.observations.registry.Trait;
+import observatory.observations.common.component.TraitComponent;
+import observatory.observations.common.registry.Trait;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -19,7 +20,7 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
     }
 
     @Inject(method = "tickMovement", at = @At("TAIL"))
-    private void observations$skibidiMovement(CallbackInfo ci) {
+    private void observations$multiplySprintSpeed(CallbackInfo ci) {
         if (TraitComponent.get(this).hasTrait(Trait.WEIGHTLESS)) {
             this.forwardSpeed *= 0.3f;
         }

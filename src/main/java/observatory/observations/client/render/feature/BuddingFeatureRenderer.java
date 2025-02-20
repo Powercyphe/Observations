@@ -1,4 +1,4 @@
-package observatory.observations.render.feature;
+package observatory.observations.client.render.feature;
 
 import net.minecraft.block.AmethystClusterBlock;
 import net.minecraft.block.Block;
@@ -17,9 +17,9 @@ import net.minecraft.client.render.model.json.ModelTransformationMode;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.math.RotationAxis;
-import observatory.observations.component.BuddingComponent;
+import observatory.observations.common.component.BuddingComponent;
 import observatory.observations.mixin.accessor.ItemRendererAccessor;
-import observatory.observations.registry.ModComponents;
+import observatory.observations.common.registry.ModComponents;
 
 public class BuddingFeatureRenderer<T extends LivingEntity, M extends BipedEntityModel<T>, A extends BipedEntityModel<T>> extends FeatureRenderer<T, M> {
     private ItemRenderer itemRenderer;

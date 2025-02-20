@@ -1,4 +1,4 @@
-package observatory.observations.component;
+package observatory.observations.common.component;
 
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.component.tick.CommonTickingComponent;
@@ -11,8 +11,8 @@ import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import observatory.observations.registry.ModComponents;
-import observatory.observations.registry.Trait;
+import observatory.observations.common.registry.ModComponents;
+import observatory.observations.common.registry.Trait;
 import org.jetbrains.annotations.NotNull;
 
 public class BuddingComponent implements AutoSyncedComponent, CommonTickingComponent {
