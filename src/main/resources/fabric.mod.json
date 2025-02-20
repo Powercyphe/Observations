@@ -32,7 +32,7 @@
 		]
 	},
 	"mixins": [
-		"observations.mixins.json",
+		"observations.mixins.json"
 	],
 	"depends": {
 		"fabricloader": "*",
