@@ -22,8 +22,8 @@ import observatory.observations.common.registry.ModComponents;
 import observatory.observations.mixin.accessor.ItemRendererAccessor;
 
 public class BuddingFeatureRenderer<T extends LivingEntity, M extends BipedEntityModel<T>, A extends BipedEntityModel<T>> extends FeatureRenderer<T, M> {
-    private ItemRenderer itemRenderer;
-    private BlockRenderManager blockRenderManager;
+    private final ItemRenderer itemRenderer;
+    private final BlockRenderManager blockRenderManager;
 
     public BuddingFeatureRenderer(FeatureRendererContext<T, M> context, ItemRenderer itemRenderer, BlockRenderManager blockRenderManager) {
         super(context);
