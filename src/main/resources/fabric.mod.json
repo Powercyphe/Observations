@@ -10,11 +10,11 @@
 	],
 	"custom": {
 		"cardinal-components": [
-			"observations:trait",
 			"observations:budding",
 			"observations:star",
 			"observations:water_skipping",
-			"observations:weightless"
+			"observations:trait",
+			"observations:like_void"
 		]
 	},
 	"accessWidener": "observations.accesswidener",
@@ -29,11 +29,15 @@
 			"observatory.observations.ObservationsClient"
 		],
 		"cardinal-components": [
-			"observatory.observations.common.registry.ModComponents"
+			"observatory.observations.registry.ModComponents"
 		]
 	},
 	"mixins": [
-		"observations.mixins.json"
+		"observations.mixins.json",
+		{
+			"config": "observations.client.mixins.json",
+			"environment": "client"
+		}
 	],
 	"depends": {
 		"fabricloader": "*",

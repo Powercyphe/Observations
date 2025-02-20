@@ -59,7 +59,7 @@ public enum Trait {
     LINE_OF_SIGHT("When any player is directly looked at (use the enderman range) they will be highlighted, but only for Mel."),
     NO_ENZYMES("Mel can not eat food, or get hungry. She will have buffed natural regeneration instead."),
     ACROBATICS("Mel will have natural speed 1 and jump boost 1. Can stack with speed and jump boost potion effects."),
-    // Shiny
+    // SHINY
     WEIGHTLESS("You benefit from complete weightlessness, rendering you immune to the forces of gravity, amplifying your sprinting speed in the air and resulting in twice as much knockback received."),
     INFINITE_FREEDOM("Not being limited to the ground, you can move freely in the air. Forwards or backwards movement on your behalf is no longer purely horizontal."),
     LIKE_VOID("Having virtually no mass, you possess little strength. Projectile-based weapons refuse your command. Receiving damage past a certain threshold in a single attack renders you incapacitated, temporarily preventing you from moving.");

@@ -1,13 +1,13 @@
-package observatory.observations.common.component;
-
+package observatory.observations.component;
 
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.component.tick.CommonTickingComponent;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
-import observatory.observations.common.registry.ModComponents;
+import observatory.observations.registry.ModComponents;
 import org.jetbrains.annotations.NotNull;
 
+//Component for the Like Void trait
 public class LikeVoidComponent implements AutoSyncedComponent, CommonTickingComponent {
 
     private final PlayerEntity provider;
@@ -17,7 +17,7 @@ public class LikeVoidComponent implements AutoSyncedComponent, CommonTickingComp
         this.provider = provider;
     }
 
-    public static LikeVoidComponent get(PlayerEntity player) {
+    public static LikeVoidComponent get(@NotNull PlayerEntity player) {
         return ModComponents.LIKE_VOID.get(player);
     }
 
