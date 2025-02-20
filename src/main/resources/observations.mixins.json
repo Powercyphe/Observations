@@ -5,13 +5,19 @@
   "mixins": [
     "hailey.PlayerEntityMixin",
     "shiny.EntityMixin",
+    "shiny.ItemStackMixin",
     "shiny.LivingEntityMixin",
     "shiny.PlayerEntityMixin",
-    "shiny.ItemStackMixin",
     "vann1e_.LivingEntityMixin",
     "vann1e_.PlayerEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "client": [
+    "client.pipobutter.BackgroundRendererMixin",
+    "client.shiny.ClientPlayerEntityMixin",
+    "client.vann1e_.ClientPlayerEntityMixin",
+    "client.vann1e_.PlayerEntityRendererMixin"
+  ]
 }
