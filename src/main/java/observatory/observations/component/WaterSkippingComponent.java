@@ -51,16 +51,16 @@ public class WaterSkippingComponent implements AutoSyncedComponent, CommonTickin
 
     public boolean canSkipOnWater() {
         player.sendMessage(Text.literal((player.jumpingCooldown == 0) + " " + player.isTouchingWater() + " " + player.isTouchingWater() + " " + (player.getFluidHeight(FluidTags.WATER) < 0.5)));
-        return player.jumpingCooldown == 0 && player.isTouchingWater() && player.isTouchingWater() && player.getFluidHeight(FluidTags.WATER) < 0.5;
+        return !LikeVoidComponent.get(player).isStunned() && player.jumpingCooldown == 0 && player.isTouchingWater() && player.isTouchingWater() && player.getFluidHeight(FluidTags.WATER) < 0.5;
     }
 
     @Override
     public void readFromNbt(NbtCompound nbtCompound) {
-
+        this.remainingSkippingTicks = nbtCompound.getInt("skipping_ticks");
     }
 
     @Override
     public void writeToNbt(NbtCompound nbtCompound) {
-        // rizzing up the opps with style!!!
+        nbtCompound.putInt("skipping_ticks", this.remainingSkippingTicks);
     }
 }

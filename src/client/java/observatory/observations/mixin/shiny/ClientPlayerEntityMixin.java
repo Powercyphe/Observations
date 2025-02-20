@@ -19,7 +19,7 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
     }
 
     @Inject(method = "tickMovement", at = @At("TAIL"))
-    private void observations$skibidiMovement(CallbackInfo ci) {
+    private void observations$multiplySprintSpeed(CallbackInfo ci) {
         if (TraitComponent.get(this).hasTrait(Trait.WEIGHTLESS)) {
             this.forwardSpeed *= 0.3f;
         }

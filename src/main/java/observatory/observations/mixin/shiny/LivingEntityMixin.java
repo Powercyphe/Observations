@@ -25,6 +25,6 @@ public abstract class LivingEntityMixin extends Entity {
         if (entity instanceof PlayerEntity player) {
             return original && !TraitComponent.get(player).hasTrait(Trait.WEIGHTLESS);
         }
-        return original;
+        else return original;
     }
 }

@@ -6,6 +6,8 @@
     "hailey.PlayerEntityMixin",
     "shiny.EntityMixin",
     "shiny.LivingEntityMixin",
+    "shiny.PlayerEntityMixin",
+    "shiny.ItemStackMixin",
     "vann1e_.LivingEntityMixin",
     "vann1e_.PlayerEntityMixin"
   ],
