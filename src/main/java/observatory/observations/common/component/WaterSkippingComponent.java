@@ -104,7 +104,7 @@ public class WaterSkippingComponent implements CommonTickingComponent, AutoSynce
                     ClientPlayNetworking.send(ModNetworking.WATER_SKIPPING_PACKET, packet);
                 }
             } else if (!pressingKey) {
-                remainingPressTicks = 3;
+                remainingPressTicks = 4;
             }
         }
     }
