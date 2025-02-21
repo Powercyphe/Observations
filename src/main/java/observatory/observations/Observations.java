@@ -20,9 +20,7 @@ public class Observations implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		ModNetworking.init();
-
 		TraitCommand.init();
-
 	}
 
 	public static Identifier id(String string) {

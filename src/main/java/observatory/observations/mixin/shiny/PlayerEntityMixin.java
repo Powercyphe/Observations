@@ -2,11 +2,13 @@ package observatory.observations.mixin.shiny;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.Flutterer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import observatory.observations.common.component.LikeVoidComponent;
@@ -28,7 +30,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     private void observations$stunOnDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         PlayerEntity player = (PlayerEntity) (Object) this;
 
-        if (amount >= 8 && TraitComponent.get(player).hasTrait(Trait.LIKE_VOID)) {
+        if (amount >= 8 && !source.isIn(DamageTypeTags.BYPASSES_INVULNERABILITY) && player.isAlive() && TraitComponent.get(player).hasTrait(Trait.LIKE_VOID)) {
             LikeVoidComponent.get(player).setStunned();
         }
     }
@@ -47,5 +49,14 @@ public abstract class PlayerEntityMixin extends LivingEntity {
             return false;
         }
         return true;
+    }
+
+    @Inject(method = "handleFallDamage", at = @At(value = "HEAD"), cancellable = true)
+    private void observations$preventFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
+        PlayerEntity player = (PlayerEntity) (Object) this;
+
+        if (TraitComponent.get(player).hasTrait(Trait.WEIGHTLESS)) {
+            cir.setReturnValue(false);
+        }
     }
 }

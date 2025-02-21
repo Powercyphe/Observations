@@ -32,7 +32,6 @@ public abstract class ItemStackMixin {
     @WrapWithCondition(method = "usageTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/Item;usageTick(Lnet/minecraft/world/World;Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/item/ItemStack;I)V"))
     private boolean observations$preventItemUsageTick(Item instance, World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
         if (user instanceof PlayerEntity && TraitComponent.get((PlayerEntity) user).hasTrait(Trait.LIKE_VOID) && stack.isIn(Observations.PROJECTILE_WEAPONS)) {
-            Observations.LOGGER.info("Can't use this ranged weapon!");
             return false;
         }
         else return true;

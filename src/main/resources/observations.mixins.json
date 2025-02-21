@@ -18,6 +18,7 @@
     "accessor.ItemRendererAccessor",
     "client.pipobutter.BackgroundRendererMixin",
     "client.shiny.ClientPlayerEntityMixin",
+    "client.shiny.BipedEntityModelMixin",
     "client.vann1e_.ClientPlayerEntityMixin",
     "client.vann1e_.PlayerEntityRendererMixin"
   ]
