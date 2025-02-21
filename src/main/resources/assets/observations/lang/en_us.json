@@ -2,5 +2,7 @@
   "commands.observations.trait.add": "Added the %1$s Trait to %2$s",
   "commands.observations.trait.remove": "Removed the %1$s Trait from %2$s",
   "commands.observations.trait.get": "%1$s's Traits: %2$s",
-  "commands.observations.trait.clear": "Cleared all Traits from %1$s"
+  "commands.observations.trait.clear": "Cleared all Traits from %1$s",
+  "commands.observations.trait.invalid_trait": "%s is not a valid Trait",
+  "commands.observations.trait.invalid_operation": "%s is not a valid Operation"
 }

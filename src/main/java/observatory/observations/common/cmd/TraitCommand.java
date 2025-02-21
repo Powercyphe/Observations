@@ -7,6 +7,7 @@ import net.minecraft.command.argument.EntityArgumentType;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.StringIdentifiable;
 import net.minecraft.util.collection.DefaultedList;
 import observatory.observations.common.component.TraitComponent;
@@ -28,13 +29,19 @@ public class TraitCommand {
                     .then(argument("player", EntityArgumentType.player())
                             .then(argument("operation", StringArgumentType.string())
                                     .suggests((context, builder) -> CommandSource.suggestMatching(addOrRemove(), builder))
+                                    .executes(ctx -> execute(
+                                            ctx.getSource(),
+                                            EntityArgumentType.getPlayer(ctx, "player"),
+                                            StringArgumentType.getString(ctx, "operation"),
+                                            null
+                                    ))
                                     .then(argument("trait", StringArgumentType.string())
                                             .suggests((context, builder) -> CommandSource.suggestMatching(getTraitNames(), builder)) // Suggests available traits
-                                            .executes(ctx -> setTraits(
+                                            .executes(ctx -> execute(
                                                     ctx.getSource(),
                                                     EntityArgumentType.getPlayer(ctx, "player"),
-                                                    Operation.fromId(StringArgumentType.getString(ctx, "operation")),
-                                                    Trait.fromString(StringArgumentType.getString(ctx, "trait"))
+                                                    StringArgumentType.getString(ctx, "operation"),
+                                                    StringArgumentType.getString(ctx, "trait")
                                             ))
                                     )
                             )
@@ -43,8 +50,28 @@ public class TraitCommand {
         });
     }
 
-    private static int setTraits(ServerCommandSource source, ServerPlayerEntity player, Operation operation, Trait trait) {
+    private static int execute(ServerCommandSource source, ServerPlayerEntity player, String operationId, String traitId) {
         TraitComponent component = TraitComponent.get(player);
+        Trait trait = Trait.fromString(traitId);
+        Operation operation = Operation.fromId(operationId);
+
+        // Check for invalid Operation
+        if (operation == null) {
+            source.sendFeedback(() -> {
+                return Text.translatable("commands.observations.trait.invalid_operation", operationId).formatted(Formatting.RED);
+            }, true);
+            return 0;
+        }
+
+        // Check for invalid Trait
+        if (trait == null && operation.requiresTrait()) {
+            source.sendFeedback(() -> {
+                return Text.translatable("commands.observations.trait.invalid_trait", traitId == null ? "<Empty>" : traitId).formatted(Formatting.RED);
+            }, true);
+            return 0;
+        }
+
+        // Run the Operation
         if (operation == Operation.ADD) {
             component.addTrait(trait);
             source.sendFeedback(() -> {
@@ -73,7 +100,6 @@ public class TraitCommand {
             }, true);
             return 1;
         }
-
         return 0;
     }
 
@@ -85,15 +111,21 @@ public class TraitCommand {
 
 
     private enum Operation implements StringIdentifiable {
-        ADD("add"),
-        REMOVE("remove"),
-        GET("get"),
-        CLEAR("clear");
+        ADD("add", true),
+        REMOVE("remove", true),
+        GET("get", false),
+        CLEAR("clear", false);
 
-        public final String id;
+        private final String id;
+        private final boolean requiresTrait;
 
-        Operation(String id) {
+        Operation(String id, boolean requiresTrait) {
             this.id = id;
+            this.requiresTrait = requiresTrait;
+        }
+
+        public boolean requiresTrait() {
+            return this.requiresTrait;
         }
 
         @Override

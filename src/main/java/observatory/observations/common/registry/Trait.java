@@ -5,8 +5,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Locale;
 
 public enum Trait {
-    NONE(""),
-    UUID(""),
 
     // NICKEL
     HALF_GILLS("When Touching Any Water (including rain) Gain Conduit Power But When Not Touching Water Gain Weakness"),

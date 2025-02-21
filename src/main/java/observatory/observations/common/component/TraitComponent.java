@@ -35,16 +35,22 @@ public class TraitComponent implements AutoSyncedComponent, CommonTickingCompone
         ModComponents.TRAIT.sync(this.player);
     }
 
-    public void addTrait(Trait trait) {
+    public boolean addTrait(Trait trait) {
         if (!this.traits.contains(trait)) {
             this.traits.add(trait);
             sync();
+            return true;
         }
+        return false;
     }
 
-    public void removeTrait(Trait trait) {
-        this.traits.remove(trait);
-        sync();
+    public boolean removeTrait(Trait trait) {
+        if (!this.traits.contains(trait)) {
+            this.traits.remove(trait);
+            sync();
+            return true;
+        }
+        return false;
     }
 
     public void clearTraits() {
