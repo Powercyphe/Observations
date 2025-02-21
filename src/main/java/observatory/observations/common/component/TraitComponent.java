@@ -45,7 +45,7 @@ public class TraitComponent implements AutoSyncedComponent, CommonTickingCompone
     }
 
     public boolean removeTrait(Trait trait) {
-        if (!this.traits.contains(trait)) {
+        if (this.traits.contains(trait)) {
             this.traits.remove(trait);
             sync();
             return true;
