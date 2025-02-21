@@ -51,23 +51,25 @@ public enum Trait {
     INFECTION("While you are tall and strong, you aren't immune to disease and corruption, being infected by an indescribable, unkillable infection, only weakened by heat, and while it hides under your hard exterior, it takes your energy and gives you its weaknesses, making you weaker to fire (fire/lava) but stronger against frost (freeze/frostbite)"),
     // WINTER
     PRIVILEGED_PLATES("Gold armor has properties now"),
-    SMOKED_LUNGS("Winter's badly damaged body, makes it so he drowns quicker and at high altitudes."),
-    AURIC_ARTERIES("Gold is all over and inside of Winter, making his body overall harder, defence is increased."),
+    SMOKED_LUNGS("You drown quicker and at high altitudes."),
+    AURIC_ARTERIES("Your defense is increased."),
     // POM
-    LINE_OF_SIGHT("When any player is directly looked at (use the enderman range) they will be highlighted, but only for Mel."),
-    NO_ENZYMES("Mel can not eat food, or get hungry. She will have buffed natural regeneration instead."),
-    ACROBATICS("Mel will have natural speed 1 and jump boost 1. Can stack with speed and jump boost potion effects."),
+    LINE_OF_SIGHT("Players that are looked at will be highlighted for you."),
+    NO_ENZYMES("You cannot get hungry or eat, but you regenerate health faster."),
+    ACROBATICS("You have an increase movement speed and jump height."),
     // SHINY
     WEIGHTLESS("You benefit from complete weightlessness, rendering you immune to the forces of gravity, amplifying your sprinting speed in the air and resulting in twice as much knockback received."),
     INFINITE_FREEDOM("Not being limited to the ground, you can move freely in the air. Forwards or backwards movement on your behalf is no longer purely horizontal."),
     LIKE_VOID("Having virtually no mass, you possess little strength. Projectile-based weapons refuse your command. Receiving damage past a certain threshold in a single attack renders you incapacitated, temporarily preventing you from moving.");
 
-    public final String id;
-    public final String description;
+    private final String id;
 
     Trait(String description) {
         this.id = this.toString().toLowerCase(Locale.ROOT);
-        this.description = description;
+    }
+
+    public String getId() {
+        return this.id;
     }
 
     public static @Nullable Trait fromString(String id) {

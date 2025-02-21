@@ -82,7 +82,7 @@ public class TraitComponent implements AutoSyncedComponent, CommonTickingCompone
         NbtList nbtList = new NbtList();
         for (Trait trait : this.getTraits()) {
             NbtCompound traitNbt = new NbtCompound();
-            traitNbt.putString(TRAIT_ID_KEY, trait.id);
+            traitNbt.putString(TRAIT_ID_KEY, trait.getId());
             nbtList.add(traitNbt);
         }
         nbt.put(TRAITS_KEY, nbtList);

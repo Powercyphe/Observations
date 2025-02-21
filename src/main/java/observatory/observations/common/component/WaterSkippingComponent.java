@@ -23,6 +23,7 @@ public class WaterSkippingComponent implements CommonTickingComponent, AutoSynce
     private static final String COOLDOWN = "Cooldown";
     private static final String WATER_SKIPPING_TICKS = "WaterSkippingTicks";
 
+    private static final double SKIPPING_SPEED_MULTIPLIER = 1.83;
     private static final double MAX_WATER_HEIGHT = 0.6;
 
     private boolean wasGrounded = false;
@@ -64,16 +65,17 @@ public class WaterSkippingComponent implements CommonTickingComponent, AutoSynce
     @Override
     public void tick() {
         if (TraitComponent.get(player).hasTrait(Trait.NO_LONGER_FLESH)) {
+            boolean fluidCondition = player.getFluidHeight(FluidTags.WATER) <= MAX_WATER_HEIGHT;
             if (this.cooldown > 0) {
                 this.cooldown--;
                 this.canWaterSkip = false;
             } else {
                 if (!this.wasGrounded) {
-                    this.wasGrounded = player.isOnGround() && player.getFluidHeight(FluidTags.WATER) <= MAX_WATER_HEIGHT;
-                } else if (player.isSubmergedInWater()) {
+                    this.wasGrounded = player.isOnGround() && fluidCondition;
+                } else if (!fluidCondition) {
                     this.wasGrounded = false;
                 }
-                this.canWaterSkip = (this.wasGrounded || this.waterSkippingTicks > 0) && player.isTouchingWater() && player.getFluidHeight(FluidTags.WATER) <= MAX_WATER_HEIGHT;
+                this.canWaterSkip = (this.wasGrounded || this.waterSkippingTicks > 0) && player.isTouchingWater() && fluidCondition;
             }
             if (this.waterSkippingTicks > 0) {
                 this.waterSkippingTicks--;
@@ -96,15 +98,19 @@ public class WaterSkippingComponent implements CommonTickingComponent, AutoSynce
                 if (this.canWaterSkip) {
                     remainingPressTicks = 0;
 
-                    Vec3d inputVelocity = new Vec3d(player.getVelocity().getX() * 2.14, player.getJumpVelocity(), player.getVelocity().getZ() * 2.14);
-                    skipOnWater(inputVelocity);
+                    Vec3d skipVelocity = new Vec3d(
+                            player.getVelocity().getX() * SKIPPING_SPEED_MULTIPLIER,
+                            player.getJumpVelocity(),
+                            player.getVelocity().getZ() * SKIPPING_SPEED_MULTIPLIER
+                    );
+                    skipOnWater(skipVelocity);
 
                     PacketByteBuf packet = PacketByteBufs.create();
-                    packet.writeVector3f(inputVelocity.toVector3f());
+                    packet.writeVector3f(skipVelocity.toVector3f());
                     ClientPlayNetworking.send(ModNetworking.WATER_SKIPPING_PACKET, packet);
                 }
             } else if (!pressingKey) {
-                remainingPressTicks = 4;
+                remainingPressTicks = 3;
             }
         }
     }
@@ -114,11 +120,12 @@ public class WaterSkippingComponent implements CommonTickingComponent, AutoSynce
     }
 
     public void skipOnWater(Vec3d velocity) {
-        player.setVelocity(velocity);
-        player.getWorld().playSound(player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_PLAYER_SPLASH, SoundCategory.PLAYERS, 1f, 1.2f, true);
-
         this.cooldown = 3;
         this.waterSkippingTicks = 15;
         this.wasGrounded = false;
+
+        sync();
+        player.setVelocity(velocity);
+        player.getWorld().playSound(player.getX(), player.getY(), player.getZ(), SoundEvents.ENTITY_PLAYER_SPLASH, SoundCategory.PLAYERS, 0.5f, 1.7f, true);
     }
 }

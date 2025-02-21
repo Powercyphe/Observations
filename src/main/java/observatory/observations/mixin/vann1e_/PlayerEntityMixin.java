@@ -37,11 +37,11 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         PlayerEntity player = (PlayerEntity) (Object) this;
         if (TraitComponent.get(player).hasTrait(Trait.GEODE_SOUL)) {
             amount = amount / 2;
-            if (ModComponents.BUDDING.get(this).buddingLevel > 0
-                    && source.getAttacker() != null && !player.isInvulnerableTo(source)) {
-                BuddingComponent.get(player).decreaseBuddingLevel();
-                amount = 0;
-            }
+        }
+        if (ModComponents.BUDDING.get(this).buddingLevel > 0
+                && source.getAttacker() != null && !player.isInvulnerableTo(source)) {
+            BuddingComponent.get(player).decreaseBuddingLevel();
+            amount = 0;
         }
         return amount;
     }

@@ -35,7 +35,7 @@ public class BuddingFeatureRenderer<T extends LivingEntity, M extends BipedEntit
     public void render(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int light, T entity, float limbAngle, float limbDistance, float tickDelta, float animationProgress, float headYaw, float headPitch) {
         BuddingComponent buddingComponent = ModComponents.BUDDING.get(entity);
         Block block = buddingComponent.getBlock();
-        if (block instanceof AmethystClusterBlock) {
+        if (block != null) {
             matrixStack.push();
             matrixStack.peek().getPositionMatrix().translate(0f, (entity.getHeight() / 6), -0.03f);
             BlockState blockState = block.getDefaultState();

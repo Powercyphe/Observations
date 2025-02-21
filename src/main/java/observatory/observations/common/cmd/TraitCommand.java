@@ -105,7 +105,7 @@ public class TraitCommand {
 
     private static List<String> getTraitNames() {
         return Arrays.stream(Trait.values())
-                .map(trait -> trait.id)
+                .map(Trait::getId)
                 .collect(Collectors.toList());
     }
 

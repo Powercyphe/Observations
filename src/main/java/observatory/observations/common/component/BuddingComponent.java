@@ -108,7 +108,7 @@ public class BuddingComponent implements AutoSyncedComponent, CommonTickingCompo
             case 2 -> Blocks.MEDIUM_AMETHYST_BUD;
             case 3 -> Blocks.LARGE_AMETHYST_BUD;
             case 4 -> Blocks.AMETHYST_CLUSTER;
-            default -> Blocks.AIR;
+            default -> null;
         };
     }
 
