@@ -10,6 +10,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import observatory.observations.common.component.LikeVoidComponent;
+import observatory.observations.common.component.TraitComponent;
+import observatory.observations.common.registry.Trait;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -26,7 +28,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     private void observations$stunOnDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         PlayerEntity player = (PlayerEntity) (Object) this;
 
-        if (amount >= 8) {
+        if (amount >= 8 && TraitComponent.get(player).hasTrait(Trait.LIKE_VOID)) {
             LikeVoidComponent.get(player).setStunned();
         }
     }

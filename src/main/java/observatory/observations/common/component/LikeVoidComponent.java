@@ -7,7 +7,6 @@ import net.minecraft.nbt.NbtCompound;
 import observatory.observations.common.registry.ModComponents;
 import org.jetbrains.annotations.NotNull;
 
-//Component for the Like Void trait
 public class LikeVoidComponent implements AutoSyncedComponent, CommonTickingComponent {
 
     private final PlayerEntity provider;
