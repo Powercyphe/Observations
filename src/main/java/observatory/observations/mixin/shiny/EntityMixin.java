@@ -1,10 +1,12 @@
 package observatory.observations.mixin.shiny;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
+import observatory.observations.Observations;
 import observatory.observations.common.component.TraitComponent;
 import observatory.observations.common.registry.Trait;
 import org.spongepowered.asm.mixin.Mixin;
@@ -19,5 +21,15 @@ public abstract class EntityMixin {
             return false;
         }
         else return true;
+    }
+
+    @ModifyReturnValue(method = "getStandingEyeHeight", at = @At(value = "RETURN"))
+    private float observations$weightlessFlyingEyeHeight(float original) {
+        Entity entity = (Entity) (Object) this;
+
+        if (entity instanceof PlayerEntity player && Observations.isWeightlessFlying(player) && player.isSprinting()) {
+            original = 0.5f;
+        }
+        return original;
     }
 }

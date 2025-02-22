@@ -41,11 +41,11 @@ public abstract class LivingEntityMixin extends Entity {
                 this.move(MovementType.SELF, this.getVelocity());
             }
             this.updateLimbs(this instanceof Flutterer);
-            this.calculateDimensions();
         }
         else {
             original.call(entity, movementInput);
         }
+        this.calculateDimensions();
     }
 
     @WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;isFallFlying()Z"))
@@ -77,7 +77,7 @@ public abstract class LivingEntityMixin extends Entity {
 
             return new Vec3d(
                     vec3d.x * g - vec3d.z * f,
-                    (vec3d.z > 0 ? h : -h) * speed * 1.1,
+                    (vec3d.z > 0 ? h : -h) * speed * (movementInput.z != 0 ? 1.1 : 0),
                     vec3d.z * g + vec3d.x * f
             );
         }

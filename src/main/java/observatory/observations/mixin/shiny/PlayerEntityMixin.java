@@ -2,8 +2,6 @@ package observatory.observations.mixin.shiny;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
@@ -68,14 +66,5 @@ public abstract class PlayerEntityMixin extends LivingEntity {
             original = EntityDimensions.changing(0.8f, 0.8f);
         }
         return original;
-    }
-
-    @WrapOperation(method = "updatePose", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;setPose(Lnet/minecraft/entity/EntityPose;)V"))
-    private void observations$setWeightlessFlyingDimensions(PlayerEntity player, EntityPose entityPose, Operation<Void> original) {
-        original.call(player, entityPose);
-
-        if (Observations.isWeightlessFlying(player) && player.isSprinting()) {
-            player.calculateDimensions();
-        }
     }
 }
