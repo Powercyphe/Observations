@@ -58,7 +58,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                     ((ServerWorld) player.getWorld()).spawnParticles(ParticleTypes.FIREWORK,
                             player.getX(), player.getY() + player.getHeight() / 2, player.getZ(), 7, 0, 0, 0, 0.05);
                 }
-                return amount * 2;
+                return amount * 3;
             }
         }
         return amount;

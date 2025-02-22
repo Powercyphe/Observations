@@ -21,7 +21,7 @@ public abstract class EntityMixin {
         if (entity instanceof PlayerEntity player) {
             return original || TraitComponent.get(player).hasTrait(Trait.WEIGHTLESS);
         }
-        else return original;
+        return original;
     }
 
     @WrapWithCondition(method = "move", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;fall(DZLnet/minecraft/block/BlockState;Lnet/minecraft/util/math/BlockPos;)V"))
@@ -29,6 +29,6 @@ public abstract class EntityMixin {
         if (entity instanceof PlayerEntity player && TraitComponent.get(player).hasTrait(Trait.WEIGHTLESS)) {
             return false;
         }
-        else return true;
+        return true;
     }
 }

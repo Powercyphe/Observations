@@ -21,6 +21,10 @@ repositories {
 			includeGroup "com.jamieswhiteshirt"
 		}
 	}
+	maven {
+		name = "Modrinth"
+		url = "https://api.modrinth.com/maven"
+	}
 }
 
 loom {
@@ -39,6 +43,7 @@ dependencies {
 	modImplementation("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${project.cca_version}")
 
 	modImplementation("com.jamieswhiteshirt:reach-entity-attributes:${project.rea_version}")
+	modImplementation ("maven.modrinth:AdditionalEntityAttributes:${project.aea_version}+${project.minecraft_version}")
 	
 }
 

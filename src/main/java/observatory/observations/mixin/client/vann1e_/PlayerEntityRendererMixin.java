@@ -25,12 +25,4 @@ public abstract class PlayerEntityRendererMixin extends LivingEntityRenderer<Abs
     private void applyFeatures(EntityRendererFactory.Context ctx, boolean slim, CallbackInfo ci) {
         this.addFeature(new BuddingFeatureRenderer<>(this, ctx.getItemRenderer(), ctx.getBlockRenderManager()));
     }
-
-    @Inject(method = "setModelPose", at = @At("TAIL"))
-    private void onRenderLeftArm(AbstractClientPlayerEntity player, CallbackInfo ci, @Local PlayerEntityModel<?> playerEntityModel) {
-        if (TraitComponent.get(player).hasTrait(Trait.DISARMED)) {
-            playerEntityModel.leftArm.visible = false;
-            playerEntityModel.leftSleeve.visible = false;
-        }
-    }
 }
