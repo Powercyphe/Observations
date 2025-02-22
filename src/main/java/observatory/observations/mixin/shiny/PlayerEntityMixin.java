@@ -2,15 +2,15 @@ package observatory.observations.mixin.shiny;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.Flutterer;
-import net.minecraft.entity.LivingEntity;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import observatory.observations.Observations;
 import observatory.observations.common.component.LikeVoidComponent;
 import observatory.observations.common.component.TraitComponent;
 import observatory.observations.common.registry.Trait;
@@ -57,6 +57,25 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
         if (TraitComponent.get(player).hasTrait(Trait.WEIGHTLESS)) {
             cir.setReturnValue(false);
+        }
+    }
+
+    @ModifyReturnValue(method = "getDimensions", at = @At(value = "RETURN"))
+    private EntityDimensions observations$weightlessFlyingDimensions(EntityDimensions original) {
+        PlayerEntity player = (PlayerEntity) (Object) this;
+
+        if (Observations.isWeightlessFlying(player) && player.isSprinting()) {
+            original = EntityDimensions.changing(0.8f, 0.8f);
+        }
+        return original;
+    }
+
+    @WrapOperation(method = "updatePose", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;setPose(Lnet/minecraft/entity/EntityPose;)V"))
+    private void observations$setWeightlessFlyingDimensions(PlayerEntity player, EntityPose entityPose, Operation<Void> original) {
+        original.call(player, entityPose);
+
+        if (Observations.isWeightlessFlying(player) && player.isSprinting()) {
+            player.calculateDimensions();
         }
     }
 }

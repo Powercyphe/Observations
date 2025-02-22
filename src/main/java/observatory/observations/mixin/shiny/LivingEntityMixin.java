@@ -1,6 +1,5 @@
 package observatory.observations.mixin.shiny;
 
-import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.entity.*;
@@ -29,25 +28,29 @@ public abstract class LivingEntityMixin extends Entity {
     @WrapOperation(method = "tickMovement", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;travel(Lnet/minecraft/util/math/Vec3d;)V"))
     private void observations$crosshairBasedMovement(LivingEntity entity, Vec3d movementInput, Operation<Void> original) {
 
+        float speed = this.getMovementSpeed() * (this.isSprinting() ? 1.0f : 0.35f);
+        Vec3d movement = observations$movementInputToVelocity(movementInput, speed, this.getPitch(), this.getYaw());
+        Vec3d velocity = this.getVelocity().add(movement).multiply(0.85, 0.85, 0.85);
+
+        Vec3d vec3d = ((EntityAccessor) this).observations$adjustMovementForCollisions(velocity);
+        this.verticalCollision = velocity.y != vec3d.y;
+
         if (entity instanceof PlayerEntity player && Observations.isWeightlessFlying(player)) {
             if (this.isLogicalSideForUpdatingMovement()) {
-                float speed = this.getMovementSpeed() * (this.isSprinting() ? 1.0f : 0.35f);
-                Vec3d velocity = observations$movementInputToVelocity(movementInput, speed, this.getPitch(), this.getYaw());
-
-                this.setVelocity(this.getVelocity().add(velocity).multiply(0.85, 0.85, 0.85));
+                this.setVelocity(velocity);
                 this.move(MovementType.SELF, this.getVelocity());
             }
             this.updateLimbs(this instanceof Flutterer);
+            this.calculateDimensions();
         }
         else {
             original.call(entity, movementInput);
         }
     }
 
-    @ModifyReturnValue(method = "isFallFlying", at = @At(value = "RETURN"))
-    private boolean observations$weightlessFallFlying(boolean original) {
-        LivingEntity entity = (LivingEntity) (Object) this;
-        return original || (entity instanceof PlayerEntity player && (Observations.isWeightlessFlying(player) && player.isSprinting()));
+    @WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;isFallFlying()Z"))
+    private boolean observations$updateRoll(LivingEntity entity, Operation<Boolean> original) {
+        return (entity instanceof PlayerEntity player && Observations.isWeightlessFlying(player) && player.isSprinting()) || original.call(entity);
     }
 
     @WrapOperation(method = "takeKnockback", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/Vec3d;multiply(D)Lnet/minecraft/util/math/Vec3d;"))
@@ -55,7 +58,7 @@ public abstract class LivingEntityMixin extends Entity {
         LivingEntity entity = (LivingEntity) (Object) this;
 
         if (entity instanceof PlayerEntity player && TraitComponent.get(player).hasTrait(Trait.WEIGHTLESS)) {
-            value *= 2.0f;
+            value *= 5.0f;
         }
         return original.call(vector, value);
     }
