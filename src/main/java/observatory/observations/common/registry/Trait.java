@@ -1,7 +1,15 @@
 package observatory.observations.common.registry;
 
+import de.dafuqs.additionalentityattributes.AdditionalEntityAttributes;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.util.Pair;
+import net.minecraft.util.collection.DefaultedList;
+import observatory.observations.common.util.TraitUtil;
 import org.jetbrains.annotations.Nullable;
 
+import javax.management.Attribute;
 import java.util.Locale;
 
 public enum Trait {
@@ -56,20 +64,31 @@ public enum Trait {
     // POM
     LINE_OF_SIGHT("Players that are looked at will be highlighted for you."),
     NO_ENZYMES("You cannot get hungry or eat, but you regenerate health faster."),
-    ACROBATICS("You have an increase movement speed and jump height."),
+    ACROBATICS("You have an increase movement speed and jump height.", TraitUtil.multiplyTotalModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.005), TraitUtil.multiplyTotalModifier(AdditionalEntityAttributes.JUMP_HEIGHT, 1.2)),
     // SHINY
     WEIGHTLESS("You benefit from complete weightlessness, rendering you immune to the forces of gravity, amplifying your sprinting speed in the air and resulting in twice as much knockback received."),
     INFINITE_FREEDOM("Not being limited to the ground, you can move freely in the air. Forwards or backwards movement on your behalf is no longer purely horizontal."),
     LIKE_VOID("Having virtually no mass, you possess little strength. Projectile-based weapons refuse your command. Receiving damage past a certain threshold in a single attack renders you incapacitated, temporarily preventing you from moving.");
 
     private final String id;
+    private final DefaultedList<Pair<EntityAttribute, EntityAttributeModifier>> attributes;
 
-    Trait(String description) {
+    Trait(String description, Pair<EntityAttribute, EntityAttributeModifier>... entityAttributeModifiers) {
         this.id = this.toString().toLowerCase(Locale.ROOT);
+        this.attributes = DefaultedList.copyOf(TraitUtil.additionModifier(EntityAttributes.GENERIC_LUCK, 0), entityAttributeModifiers);
     }
 
     public String getId() {
         return this.id;
+    }
+
+    public EntityAttributeModifier getModifierFor(EntityAttribute attribute) {
+        for (Pair<EntityAttribute, EntityAttributeModifier> pair : this.attributes) {
+            if (attribute == pair.getLeft()) {
+                return pair.getRight();
+            }
+        }
+        return null;
     }
 
     public static @Nullable Trait fromString(String id) {

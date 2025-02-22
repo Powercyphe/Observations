@@ -69,7 +69,7 @@ public class BuddingComponent implements AutoSyncedComponent, CommonTickingCompo
         if (this.buddingLevel < MAX_BUDDING_LEVEL) {
             this.player.getWorld().playSound(null, this.player.getBlockPos(), SoundEvents.BLOCK_AMETHYST_CLUSTER_PLACE, SoundCategory.PLAYERS, 1f, 0.65f);
             if (!this.player.getWorld().isClient()) {
-                BlockStateParticleEffect particle = new BlockStateParticleEffect(ParticleTypes.BLOCK, this.getBlock().getDefaultState());
+                BlockStateParticleEffect particle = new BlockStateParticleEffect(ParticleTypes.BLOCK, Blocks.AMETHYST_BLOCK.getDefaultState());
                 ((ServerWorld) this.player.getWorld()).spawnParticles(particle,
                         this.player.getX(), this.player.getY() + this.player.getHeight() / 2, this.player.getZ(), 14, 0, 0, 0, 3);
                 ((ServerWorld) this.player.getWorld()).spawnParticles(ParticleTypes.END_ROD,
@@ -86,7 +86,7 @@ public class BuddingComponent implements AutoSyncedComponent, CommonTickingCompo
         if (this.buddingLevel > 0) {
             this.player.getWorld().playSound(null, this.player.getBlockPos(), SoundEvents.BLOCK_AMETHYST_CLUSTER_BREAK, SoundCategory.PLAYERS, 1f, 1.35f);
             if (!this.player.getWorld().isClient()) {
-                BlockStateParticleEffect particle = new BlockStateParticleEffect(ParticleTypes.BLOCK, this.getBlock().getDefaultState());
+                BlockStateParticleEffect particle = new BlockStateParticleEffect(ParticleTypes.BLOCK, Blocks.AMETHYST_BLOCK.getDefaultState());
                 ((ServerWorld) this.player.getWorld()).spawnParticles(particle,
                         this.player.getX(), this.player.getY() + this.player.getHeight() / 2, this.player.getZ(), 14, 0, 0, 0, 3);
                 ((ServerWorld) this.player.getWorld()).spawnParticles(ParticleTypes.END_ROD,

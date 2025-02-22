@@ -3,7 +3,13 @@
   "package": "observatory.observations.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "AttributeContainerMixin",
+    "DefaultAttributeContainerMixin",
+    "EntityAttributeInstanceMixin",
+    "LivingEntityMixin",
     "hailey.PlayerEntityMixin",
+    "pom.HungerManagerMixin",
+    "pom.ItemStackMixin",
     "shiny.EntityMixin",
     "shiny.ItemStackMixin",
     "shiny.LivingEntityMixin",
@@ -17,6 +23,7 @@
   "client": [
     "accessor.ItemRendererAccessor",
     "client.pipobutter.BackgroundRendererMixin",
+    "client.pom.MinecraftClientMixin",
     "client.shiny.ClientPlayerEntityMixin",
     "client.vann1e_.ClientPlayerEntityMixin",
     "client.vann1e_.PlayerEntityRendererMixin"
