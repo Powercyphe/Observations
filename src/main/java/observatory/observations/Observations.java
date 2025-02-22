@@ -1,12 +1,15 @@
 package observatory.observations;
 
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import observatory.observations.common.cmd.TraitCommand;
+import observatory.observations.common.component.TraitComponent;
 import observatory.observations.common.registry.ModNetworking;
+import observatory.observations.common.registry.Trait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,5 +28,13 @@ public class Observations implements ModInitializer {
 
 	public static Identifier id(String string) {
 		return new Identifier(MOD_ID, string);
+	}
+
+	public static boolean isWeightlessFlying(PlayerEntity player) {
+		return TraitComponent.get(player).hasTrait(Trait.WEIGHTLESS)
+				//&& !player.isOnGround()
+				&& !player.groundCollision
+				&& !player.isSwimming()
+				&& !player.isUsingRiptide();
 	}
 }
