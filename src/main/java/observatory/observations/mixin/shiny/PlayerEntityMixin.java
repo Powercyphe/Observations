@@ -66,7 +66,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
             int i = Math.round((float) Math.sqrt(dx * dx + dz * dz) * 100.0f);
             if (i > 0) {
                 if (this.isSprinting()) {
-                    this.addExhaustion(0.1f * (float) i * 0.01f);
+                    this.addExhaustion(0.1f * (float) i * 0.007f);
                 }
                 else {
                     this.addExhaustion(0.0f * (float) i * 0.01f);
