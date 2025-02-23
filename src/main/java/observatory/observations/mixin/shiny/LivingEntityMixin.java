@@ -11,6 +11,7 @@ import observatory.observations.common.component.TraitComponent;
 import observatory.observations.common.registry.Trait;
 import observatory.observations.common.util.TraitUtil;
 import observatory.observations.mixin.accessor.EntityAccessor;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -21,6 +22,8 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Shadow public abstract float getMovementSpeed();
     @Shadow public abstract void updateLimbs(boolean flutter);
+
+    @Shadow @Final public LimbAnimator limbAnimator;
 
     public LivingEntityMixin(EntityType<?> type, World world) {
         super(type, world);
@@ -41,7 +44,12 @@ public abstract class LivingEntityMixin extends Entity {
                 this.setVelocity(velocity);
                 this.move(MovementType.SELF, this.getVelocity());
             }
-            this.updateLimbs(this instanceof Flutterer);
+            if (this.isSprinting()) {
+                float f = (float) MathHelper.magnitude(this.getX() - this.prevX, 0.0, this.getZ() - this.prevZ);
+                f = Math.min(f * 4.0f, 1.0f);
+                this.limbAnimator.updateLimbs(f * 0.2f, 0.05f);
+            }
+            else this.updateLimbs(false);
         }
         else {
             original.call(entity, movementInput);

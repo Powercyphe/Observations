@@ -37,7 +37,7 @@ public enum Trait {
     // HAILEY
     WEEEE("Throws people 3-4 blocks in the air [only when hitting someone with their hands]"),
     HEAVY_HITTER("Decreased attack speed, increased attack damage", TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.5), TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_ATTACK_SPEED, 0.75)),
-    WEIGHED_DOWN("Increased knockback resistance, but has constant slowness 1", TraitUtil.additionModifier(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 0.3), TraitUtil.additionModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, -0.01)),
+    WEIGHED_DOWN("Increased knockback resistance, but has constant slowness 1", TraitUtil.additionModifier(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 0.3), TraitUtil.additionModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, -0.05)),
     // PLURIXITY
     CRESCENT_THIEF("Copies/steals the nearest Players abilities"),
     // KAJ0JAJ0
