@@ -10,6 +10,7 @@ import net.minecraft.world.World;
 import observatory.observations.Observations;
 import observatory.observations.common.component.TraitComponent;
 import observatory.observations.common.registry.Trait;
+import observatory.observations.mixin.accessor.EntityAccessor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;

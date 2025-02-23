@@ -13,6 +13,6 @@ public abstract class PlayerEntityRendererMixin {
 
     @WrapOperation(method = "setupTransforms(Lnet/minecraft/client/network/AbstractClientPlayerEntity;Lnet/minecraft/client/util/math/MatrixStack;FFF)V", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/AbstractClientPlayerEntity;isFallFlying()Z"))
     private boolean observations$setupTransforms(AbstractClientPlayerEntity player, Operation<Boolean> original) {
-        return (Observations.isWeightlessFlying(player) && player.isSprinting()) || original.call(player);
+        return (Observations.isWeightlessFlying(player) && !player.horizontalCollision && player.isSprinting()) || original.call(player);
     }
 }

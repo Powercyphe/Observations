@@ -27,7 +27,7 @@ public abstract class EntityMixin {
     private float observations$weightlessFlyingEyeHeight(float original) {
         Entity entity = (Entity) (Object) this;
 
-        if (entity instanceof PlayerEntity player && Observations.isWeightlessFlying(player) && player.isSprinting()) {
+        if (entity instanceof PlayerEntity player && Observations.isWeightlessFlying(player) && !player.horizontalCollision && player.isSprinting()) {
             original = 0.5f;
         }
         return original;

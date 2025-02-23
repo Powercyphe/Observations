@@ -1,4 +1,4 @@
-package observatory.observations.mixin.shiny;
+package observatory.observations.mixin.accessor;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.Vec3d;

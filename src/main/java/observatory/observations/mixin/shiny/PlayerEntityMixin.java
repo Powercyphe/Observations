@@ -62,8 +62,8 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     private EntityDimensions observations$weightlessFlyingDimensions(EntityDimensions original) {
         PlayerEntity player = (PlayerEntity) (Object) this;
 
-        if (Observations.isWeightlessFlying(player) && player.isSprinting()) {
-            original = EntityDimensions.changing(0.8f, 0.8f);
+        if (Observations.isWeightlessFlying(player) && !player.horizontalCollision && player.isSprinting()) {
+            original = EntityDimensions.changing(0.7f, 0.8f);
         }
         return original;
     }

@@ -10,7 +10,7 @@
     "hailey.PlayerEntityMixin",
     "pom.HungerManagerMixin",
     "pom.ItemStackMixin",
-    "shiny.EntityAccessor",
+    "accessor.EntityAccessor",
     "shiny.EntityMixin",
     "shiny.ItemStackMixin",
     "shiny.LivingEntityMixin",
@@ -26,6 +26,7 @@
     "client.pipobutter.BackgroundRendererMixin",
     "client.pom.MinecraftClientMixin",
     "client.shiny.ClientPlayerEntityMixin",
+    "client.shiny.ElytraSoundInstanceMixin",
     "client.shiny.PlayerEntityRendererMixin",
     "client.vann1e_.ClientPlayerEntityMixin",
     "client.vann1e_.PlayerEntityRendererMixin"
