@@ -3,12 +3,14 @@ package observatory.observations.common.component;
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.component.tick.CommonTickingComponent;
 import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtList;
+import net.minecraft.util.Pair;
 import net.minecraft.util.collection.DefaultedList;
 import observatory.observations.common.registry.ModComponents;
 import observatory.observations.common.registry.Trait;
@@ -40,10 +42,50 @@ public class TraitComponent implements AutoSyncedComponent, CommonTickingCompone
         ModComponents.TRAIT.sync(this.player);
     }
 
+    public void applyAttributeModifiers(Trait trait) {
+        for (Pair<EntityAttribute, EntityAttributeModifier> pair : trait.getModifiedAttributes()) {
+            EntityAttributeInstance entityAttributeInstance = this.player.getAttributeInstance(pair.getLeft());
+
+            if (entityAttributeInstance != null && !entityAttributeInstance.hasModifier(pair.getRight())) {
+                entityAttributeInstance.addTemporaryModifier(pair.getRight());
+            }
+        }
+    }
+
+    public void removeAttributeModifiers(Trait trait) {
+        for (Pair<EntityAttribute, EntityAttributeModifier> pair : trait.getModifiedAttributes()) {
+            EntityAttributeInstance entityAttributeInstance = this.player.getAttributeInstance(pair.getLeft());
+
+            if (entityAttributeInstance != null && entityAttributeInstance.hasModifier(pair.getRight())) {
+                entityAttributeInstance.removeModifier(pair.getRight());
+            }
+        }
+    }
+
+    public void clearAttributeModifiers() {
+        if (!this.traits.isEmpty()) {
+            //Gets all traits provided by the component
+            for (Trait trait : this.traits) {
+
+                //Gets all Attributes and their modifiers as provided by each trait
+                for (Pair<EntityAttribute, EntityAttributeModifier> pair : trait.getModifiedAttributes()) {
+                    EntityAttributeInstance entityAttributeInstance = this.player.getAttributeInstance(pair.getLeft());
+
+                    //Removes modifiers provided by the trait
+                    if (entityAttributeInstance != null && entityAttributeInstance.hasModifier(pair.getRight())) {
+                        entityAttributeInstance.removeModifier(pair.getRight());
+                    }
+                }
+            }
+        }
+    }
+
     public boolean addTrait(Trait trait) {
         if (!this.traits.contains(trait)) {
+            applyAttributeModifiers(trait);
             this.traits.add(trait);
             sync();
+
             return true;
         }
         return false;
@@ -51,14 +93,17 @@ public class TraitComponent implements AutoSyncedComponent, CommonTickingCompone
 
     public boolean removeTrait(Trait trait) {
         if (this.traits.contains(trait)) {
+            removeAttributeModifiers(trait);
             this.traits.remove(trait);
             sync();
+
             return true;
         }
         return false;
     }
 
     public void clearTraits() {
+        clearAttributeModifiers();
         this.traits.clear();
         sync();
     }

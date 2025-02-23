@@ -36,21 +36,21 @@ public enum Trait {
     GASSED_UP("The permanent high effecting her body has caused her to gain more energy and her neurons to fire faster"),
     // HAILEY
     WEEEE("Throws people 3-4 blocks in the air [only when hitting someone with their hands]"),
-    HEAVY_HITTER("Decreased attack speed, increased attack damage"),
-    WEIGHED_DOWN("Increased knockback resistance, but has constant slowness 1"),
+    HEAVY_HITTER("Decreased attack speed, increased attack damage", TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.5), TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_ATTACK_SPEED, 0.75)),
+    WEIGHED_DOWN("Increased knockback resistance, but has constant slowness 1", TraitUtil.additionModifier(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 0.3), TraitUtil.additionModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, -0.01)),
     // PLURIXITY
     CRESCENT_THIEF("Copies/steals the nearest Players abilities"),
     // KAJ0JAJ0
-    SOULLESS_CREATURE("You're not really alive so most monsters dont attack you but since youre not alive you dont have natural regeneration"),
+    SOULLESS_CREATURE("You're not really alive so most monsters don't attack you but since you're not alive you don't have natural regeneration"),
     STRONG_HANDS_EVEN_STRONGER_MORALS("You deal more base damage (only in sunlight) but you can't get any player lower than half a heart"),
     PHOTOSYNTHESIS("Being a plant makes it so you can't eat food, you have to rely on a source of light"),
     // PIPOBUTTER
-    MAGMA_COVERED("Because of your magma skin gain fire immunity and  you can swim in lava just like water, But you cannot swim in water as you  will sink because your skin rapid cooling."),
+    MAGMA_COVERED("Because of your magma skin gain fire immunity and you can swim in lava just like water, But you cannot swim in water as you  will sink because your skin rapid cooling."),
     FAMILIARITY("You're a nether born creature and others see you as neutral, if you attack them they will attack back."),
     COMFORTING_WARMTH("While being on fire you gain regen one and if inside of lava you have regen 2"),
     // WAZZO
-    SLIPPERY("all blocks behave as ice, making me frictionless"),
-    TALL("step height increase to a full block"),
+    SLIPPERY("All blocks behave as ice, making me frictionless"),
+    TALL("Step height is increased to a full block"),
     ACCELERATION_MATRIX("because I am frictionless the longer I run the faster I go, and at certain thresholds I gain positive effects. The first is increased attack speed (3X), then even faster I’ll just do damage to people by running into people, and at “maximum” speed I can run on water (and lava if wearing netherite boots), all with the caveat that the faster I go, if I were to crash, I take exponentially increased"),
     // RAFSA
     STRONGER_THAN_STONE("After being in the caves so long, you have had stone, moss and anything that doesn't or has yet to exist make its home on your body, making you tankier (+2 hearts) but being extremely slow (slowness 2)"),
@@ -59,11 +59,11 @@ public enum Trait {
     // WINTER
     PRIVILEGED_PLATES("Gold armor has properties now"),
     SMOKED_LUNGS("You drown quicker and at high altitudes."),
-    AURIC_ARTERIES("Your defense is increased."),
+    AURIC_ARTERIES("Your defense is increased.", TraitUtil.additionModifier(EntityAttributes.GENERIC_ARMOR, 6)),
     // POM
     LINE_OF_SIGHT("Players that are looked at will be highlighted for you."),
     NO_ENZYMES("You cannot get hungry or eat, but you regenerate health faster."),
-    ACROBATICS("You have an increase movement speed and jump height.", TraitUtil.multiplyTotalModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.005), TraitUtil.multiplyTotalModifier(AdditionalEntityAttributes.JUMP_HEIGHT, 1.2)),
+    ACROBATICS("You have an increase movement speed and jump height.", TraitUtil.multiplyTotalModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.00015), TraitUtil.multiplyTotalModifier(AdditionalEntityAttributes.JUMP_HEIGHT, 1.2)),
     // SHINY
     WEIGHTLESS("You benefit from complete weightlessness, rendering you immune to the forces of gravity, amplifying your sprinting speed in the air and resulting in twice as much knockback received."),
     INFINITE_FREEDOM("Not being limited to the ground, you can move freely in the air. Forwards or backwards movement on your behalf is no longer purely horizontal."),
@@ -79,6 +79,10 @@ public enum Trait {
 
     public String getId() {
         return this.id;
+    }
+
+    public DefaultedList<Pair<EntityAttribute, EntityAttributeModifier>> getModifiedAttributes() {
+        return this.attributes;
     }
 
     public EntityAttributeModifier getModifierFor(EntityAttribute attribute) {

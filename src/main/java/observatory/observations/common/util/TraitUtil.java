@@ -18,8 +18,8 @@ public class TraitUtil {
     public static final UUID ATTACK_KNOCKBACK_MODIFIER = UUID.fromString("a20c2a71-1071-49f5-b603-41f4642ee834");
     public static final UUID MOVEMENT_SPEED_MODIFIER = UUID.fromString("dde6dbe9-732b-4c85-8e51-b033d9446b43");
     public static final UUID ARMOR_MODIFIER = UUID.fromString("7a8fb222-7e95-48b9-9bfe-b17d47b04089");
-    public static final UUID ARMOR_TOUGHNESS = UUID.fromString("e3c9c6c5-39eb-4974-a052-5f4f0b123f0a");
-    public static final UUID KNOCKBACK_RESISTANCE = UUID.fromString("9d0eff0e-3ca7-4f24-8b88-832a973e3b87");
+    public static final UUID ARMOR_TOUGHNESS_MODIFIER = UUID.fromString("e3c9c6c5-39eb-4974-a052-5f4f0b123f0a");
+    public static final UUID KNOCKBACK_RESISTANCE_MODIFIER = UUID.fromString("9d0eff0e-3ca7-4f24-8b88-832a973e3b87");
 
     public static Pair<EntityAttribute, EntityAttributeModifier> createModifier(EntityAttribute attribute, EntityAttributeModifier.Operation operation, double value) {
         return new Pair<>(attribute, new EntityAttributeModifier(UUID.randomUUID(), Text.translatable(attribute.getTranslationKey()).getString() + "Modifier", value, operation));
