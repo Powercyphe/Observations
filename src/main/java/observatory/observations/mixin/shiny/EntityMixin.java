@@ -6,9 +6,9 @@ import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.BlockPos;
-import observatory.observations.Observations;
 import observatory.observations.common.component.TraitComponent;
 import observatory.observations.common.registry.Trait;
+import observatory.observations.common.util.TraitUtil;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 
@@ -27,7 +27,7 @@ public abstract class EntityMixin {
     private float observations$weightlessFlyingEyeHeight(float original) {
         Entity entity = (Entity) (Object) this;
 
-        if (entity instanceof PlayerEntity player && Observations.isWeightlessFlying(player) && !player.horizontalCollision && player.isSprinting()) {
+        if (entity instanceof PlayerEntity player && TraitUtil.isWeightlessFlying(player) && !player.horizontalCollision && player.isSprinting()) {
             original = 0.5f;
         }
         return original;

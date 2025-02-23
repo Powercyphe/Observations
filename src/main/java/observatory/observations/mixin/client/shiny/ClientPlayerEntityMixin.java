@@ -7,9 +7,11 @@ import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.sound.ElytraSoundInstance;
 import net.minecraft.client.world.ClientWorld;
-import observatory.observations.Observations;
+import net.minecraft.entity.player.PlayerEntity;
+import observatory.observations.ObservationsClient;
 import observatory.observations.common.component.TraitComponent;
 import observatory.observations.common.registry.Trait;
+import observatory.observations.common.util.TraitUtil;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -44,7 +46,7 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
     @Inject(method = "tickMovement", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/AbstractClientPlayerEntity;tickMovement()V", shift = At.Shift.AFTER))
     private void observations$playWeightlessFlyingSound(CallbackInfo ci) {
         if (this.startedSprinting) {
-            if (Observations.isWeightlessFlying(this) && this.isSprinting()) {
+            if (TraitUtil.isWeightlessFlying(this) && this.isSprinting()) {
                 ClientPlayerEntity player = (ClientPlayerEntity) (Object) this;
                 this.client.getSoundManager().play(new ElytraSoundInstance(player));
                 this.startedSprinting = false;
@@ -53,9 +55,26 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
         }
     }
 
+    @Inject(method = "tick", at = @At(value = "TAIL"))
+    private void observations$spawnFlyingParticles(CallbackInfo ci) {
+        ClientPlayerEntity clientPlayer = this.client.player;
+
+        if (clientPlayer != null && this.getWorld().isClient()) {
+            boolean inFirstPerson = MinecraftClient.getInstance().options.getPerspective().isFirstPerson();
+
+            for (PlayerEntity checkedPlayer : clientPlayer.getWorld().getPlayers()) {
+                boolean canSpawnParticle = (checkedPlayer.getUuid().equals(clientPlayer.getUuid()) && !inFirstPerson) || !checkedPlayer.getUuid().equals(clientPlayer.getUuid());
+
+                if (canSpawnParticle && TraitUtil.isWeightlessFlying(checkedPlayer) && checkedPlayer.isSprinting() && this.age % 10 == 0) {
+                    MinecraftClient.getInstance().particleManager.addParticle(ObservationsClient.SHOCKWAVE, checkedPlayer.getX(), checkedPlayer.getY(), checkedPlayer.getZ(), 0.0, 0.0, 0.0);
+                }
+            }
+        }
+    }
+
     @Override
     public void setSprinting(boolean sprinting) {
-        if (sprinting && Observations.isWeightlessFlying(this) && this.horizontalCollision) sprinting = false;
+        if (sprinting && TraitUtil.isWeightlessFlying(this) && this.horizontalCollision) sprinting = false;
         super.setSprinting(sprinting);
     }
 }

@@ -9,7 +9,6 @@ import net.minecraft.util.collection.DefaultedList;
 import observatory.observations.common.util.TraitUtil;
 import org.jetbrains.annotations.Nullable;
 
-import javax.management.Attribute;
 import java.util.Locale;
 
 public enum Trait {

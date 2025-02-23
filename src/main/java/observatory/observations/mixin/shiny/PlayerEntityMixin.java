@@ -6,19 +6,27 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.registry.tag.DamageTypeTags;
+import net.minecraft.stat.Stat;
+import net.minecraft.stat.Stats;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import observatory.observations.Observations;
 import observatory.observations.common.component.LikeVoidComponent;
 import observatory.observations.common.component.TraitComponent;
 import observatory.observations.common.registry.Trait;
+import observatory.observations.common.util.TraitUtil;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity {
+
+    @Shadow public abstract void increaseStat(Stat<?> stat, int amount);
+
+    @Shadow public abstract void addExhaustion(float exhaustion);
 
     protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
@@ -49,6 +57,24 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         return true;
     }
 
+    @Inject(method = "increaseTravelMotionStats", at = @At(value = "HEAD"))
+    private void observations$applyExhaustionWhenFlying(double dx, double dy, double dz, CallbackInfo ci) {
+        PlayerEntity player = (PlayerEntity) (Object) this;
+
+        if (!this.hasVehicle() && TraitUtil.isWeightlessFlying(player)) {
+
+            int i = Math.round((float) Math.sqrt(dx * dx + dz * dz) * 100.0f);
+            if (i > 0) {
+                if (this.isSprinting()) {
+                    this.addExhaustion(0.1f * (float) i * 0.01f);
+                }
+                else {
+                    this.addExhaustion(0.0f * (float) i * 0.01f);
+                }
+            }
+        }
+    }
+
     @Inject(method = "handleFallDamage", at = @At(value = "HEAD"), cancellable = true)
     private void observations$preventFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource, CallbackInfoReturnable<Boolean> cir) {
         PlayerEntity player = (PlayerEntity) (Object) this;
@@ -62,7 +88,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     private EntityDimensions observations$weightlessFlyingDimensions(EntityDimensions original) {
         PlayerEntity player = (PlayerEntity) (Object) this;
 
-        if (Observations.isWeightlessFlying(player) && !player.horizontalCollision && player.isSprinting()) {
+        if (TraitUtil.isWeightlessFlying(player) && !player.horizontalCollision && player.isSprinting()) {
             original = EntityDimensions.changing(0.7f, 0.8f);
         }
         return original;

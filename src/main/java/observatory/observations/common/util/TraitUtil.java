@@ -2,8 +2,12 @@ package observatory.observations.common.util;
 
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.util.Pair;
+import observatory.observations.common.component.TraitComponent;
+import observatory.observations.common.registry.ModComponents;
+import observatory.observations.common.registry.Trait;
 
 import java.util.UUID;
 
@@ -31,5 +35,16 @@ public class TraitUtil {
 
     public static Pair<EntityAttribute, EntityAttributeModifier> multiplyTotalModifier(EntityAttribute attribute, double value) {
         return createModifier(attribute, EntityAttributeModifier.Operation.MULTIPLY_TOTAL, value);
+    }
+
+    public static boolean isWeightlessFlying(PlayerEntity player) {
+        if (player != null && ModComponents.TRAIT.getNullable(player) != null) {
+            return TraitComponent.get(player).hasTrait(Trait.INFINITE_FREEDOM)
+                    && !player.isSwimming()
+                    && !player.isUsingRiptide()
+                    && !player.isFallFlying()
+                    && (!player.verticalCollision || player.getPitch() < 0.0);
+        }
+        return false;
     }
 }

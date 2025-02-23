@@ -7,9 +7,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import observatory.observations.Observations;
 import observatory.observations.common.component.TraitComponent;
 import observatory.observations.common.registry.Trait;
+import observatory.observations.common.util.TraitUtil;
 import observatory.observations.mixin.accessor.EntityAccessor;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -36,7 +36,7 @@ public abstract class LivingEntityMixin extends Entity {
         Vec3d vec3d = ((EntityAccessor) this).observations$adjustMovementForCollisions(velocity);
         this.verticalCollision = velocity.y != vec3d.y;
 
-        if (entity instanceof PlayerEntity player && Observations.isWeightlessFlying(player)) {
+        if (entity instanceof PlayerEntity player && TraitUtil.isWeightlessFlying(player)) {
             if (this.isLogicalSideForUpdatingMovement()) {
                 this.setVelocity(velocity);
                 this.move(MovementType.SELF, this.getVelocity());
@@ -51,7 +51,7 @@ public abstract class LivingEntityMixin extends Entity {
 
     @WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;isFallFlying()Z"))
     private boolean observations$updateRoll(LivingEntity entity, Operation<Boolean> original) {
-        return (entity instanceof PlayerEntity player && Observations.isWeightlessFlying(player) && player.isSprinting()) || original.call(entity);
+        return (entity instanceof PlayerEntity player && TraitUtil.isWeightlessFlying(player) && player.isSprinting()) || original.call(entity);
     }
 
     @WrapOperation(method = "takeKnockback", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/Vec3d;multiply(D)Lnet/minecraft/util/math/Vec3d;"))
