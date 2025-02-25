@@ -13,7 +13,8 @@
 			"observations:trait",
 			"observations:budding",
 			"observations:water_skipping",
-			"observations:like_void"
+			"observations:like_void",
+			"observations:weightless"
 		]
 	},
 	"accessWidener": "observations.accesswidener",

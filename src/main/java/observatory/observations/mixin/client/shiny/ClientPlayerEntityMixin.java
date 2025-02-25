@@ -9,6 +9,7 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.player.PlayerEntity;
 import observatory.observations.ObservationsClient;
 import observatory.observations.common.component.TraitComponent;
+import observatory.observations.common.registry.ModComponents;
 import observatory.observations.common.registry.Trait;
 import observatory.observations.common.util.TraitUtil;
 import org.spongepowered.asm.mixin.Final;
@@ -30,22 +31,24 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
         super(world, profile);
     }
 
+    //Trait: Weightless
     @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/AbstractClientPlayerEntity;tick()V"))
     private void observations$sprintStatus(CallbackInfo ci) {
-        if (TraitComponent.get(this).hasTrait(Trait.INFINITE_FREEDOM) && this.isSprinting() && !this.client.options.sprintKey.isPressed()) {
+        if (TraitComponent.get(this).hasTrait(Trait.WEIGHTLESS) && this.isSprinting() && !this.client.options.sprintKey.isPressed()) {
             this.setSprinting(false);
         }
 
-        if (!this.hasPlayedSound && TraitComponent.get(this).hasTrait(Trait.INFINITE_FREEDOM) && (!this.isSprinting() || this.isOnGround()) && !this.horizontalCollision && this.client.options.sprintKey.isPressed()) {
+        if (!this.hasPlayedSound && TraitComponent.get(this).hasTrait(Trait.WEIGHTLESS) && (!this.isSprinting() || this.isOnGround()) && !this.horizontalCollision && this.client.options.sprintKey.isPressed()) {
             this.startedSprinting = true;
         }
         this.hasPlayedSound = false;
     }
 
+    //Trait: Weightless
     @Inject(method = "tickMovement", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/AbstractClientPlayerEntity;tickMovement()V", shift = At.Shift.AFTER))
     private void observations$playWeightlessFlyingSound(CallbackInfo ci) {
         if (this.startedSprinting) {
-            if (TraitUtil.isWeightlessFlying(this) && this.isSprinting()) {
+            if (TraitUtil.isWeightlessFlying(this) && !this.horizontalCollision && this.isSprinting()) {
                 ClientPlayerEntity player = (ClientPlayerEntity) (Object) this;
                 this.client.getSoundManager().play(new ElytraSoundInstance(player));
                 this.startedSprinting = false;
@@ -54,6 +57,7 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
         }
     }
 
+    //Trait: Weightless
     @Inject(method = "tick", at = @At(value = "TAIL"))
     private void observations$spawnFlyingParticles(CallbackInfo ci) {
         ClientPlayerEntity clientPlayer = this.client.player;
@@ -64,13 +68,14 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
             for (PlayerEntity checkedPlayer : clientPlayer.getWorld().getPlayers()) {
                 boolean canSpawnParticle = (checkedPlayer.getUuid().equals(clientPlayer.getUuid()) && !inFirstPerson) || !checkedPlayer.getUuid().equals(clientPlayer.getUuid());
 
-                if (canSpawnParticle && TraitUtil.isWeightlessFlying(checkedPlayer) && checkedPlayer.isSprinting() && this.age % 10 == 0) {
+                if (canSpawnParticle && TraitUtil.isWeightlessFlying(checkedPlayer) && !checkedPlayer.horizontalCollision && checkedPlayer.isSprinting() && this.age % 10 == 0) {
                     MinecraftClient.getInstance().particleManager.addParticle(ObservationsClient.SHOCKWAVE, checkedPlayer.getX(), checkedPlayer.getY(), checkedPlayer.getZ(), 0.0, 0.0, 0.0);
                 }
             }
         }
     }
 
+    //Trait: Weightless
     @Override
     public void setSprinting(boolean sprinting) {
         if (sprinting && TraitUtil.isWeightlessFlying(this) && this.horizontalCollision) sprinting = false;

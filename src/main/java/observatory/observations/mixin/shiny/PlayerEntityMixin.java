@@ -84,13 +84,13 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         }
     }
 
-    @ModifyReturnValue(method = "getDimensions", at = @At(value = "RETURN"))
-    private EntityDimensions observations$weightlessFlyingDimensions(EntityDimensions original) {
+    @Override
+    public EntityDimensions getDimensions(EntityPose pose) {
         PlayerEntity player = (PlayerEntity) (Object) this;
 
         if (TraitUtil.isWeightlessFlying(player) && !player.horizontalCollision && player.isSprinting()) {
-            original = EntityDimensions.changing(0.7f, 0.8f);
+            return EntityDimensions.changing(0.7f, 0.8f);
         }
-        return original;
+        else return super.getDimensions(pose);
     }
 }

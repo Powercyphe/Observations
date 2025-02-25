@@ -15,6 +15,7 @@ import org.spongepowered.asm.mixin.injection.At;
 @Mixin(Entity.class)
 public abstract class EntityMixin {
 
+    //Trait: Weightless
     @WrapWithCondition(method = "move", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;fall(DZLnet/minecraft/block/BlockState;Lnet/minecraft/util/math/BlockPos;)V"))
     private boolean observations$preventFall(Entity entity, double heightDifference, boolean onGround, BlockState state, BlockPos landedPosition) {
         if (entity instanceof PlayerEntity player && TraitComponent.get(player).hasTrait(Trait.WEIGHTLESS)) {
@@ -23,6 +24,7 @@ public abstract class EntityMixin {
         else return true;
     }
 
+    //Trait: Weightless
     @ModifyReturnValue(method = "getStandingEyeHeight", at = @At(value = "RETURN"))
     private float observations$weightlessFlyingEyeHeight(float original) {
         Entity entity = (Entity) (Object) this;

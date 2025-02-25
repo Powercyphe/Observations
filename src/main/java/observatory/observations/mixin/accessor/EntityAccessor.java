@@ -10,4 +10,7 @@ public interface EntityAccessor {
 
     @Invoker("adjustMovementForCollisions")
     public Vec3d observations$adjustMovementForCollisions(Vec3d movement);
+
+    @Invoker("isBeingRainedOn")
+    public boolean observations$isBeingRainedOn();
 }

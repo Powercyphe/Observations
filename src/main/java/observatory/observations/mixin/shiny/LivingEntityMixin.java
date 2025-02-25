@@ -8,6 +8,7 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import observatory.observations.common.component.TraitComponent;
+import observatory.observations.common.registry.ModComponents;
 import observatory.observations.common.registry.Trait;
 import observatory.observations.common.util.TraitUtil;
 import observatory.observations.mixin.accessor.EntityAccessor;
@@ -22,13 +23,13 @@ public abstract class LivingEntityMixin extends Entity {
 
     @Shadow public abstract float getMovementSpeed();
     @Shadow public abstract void updateLimbs(boolean flutter);
-
     @Shadow @Final public LimbAnimator limbAnimator;
 
     public LivingEntityMixin(EntityType<?> type, World world) {
         super(type, world);
     }
 
+    //Trait: Weightless
     @WrapOperation(method = "tickMovement", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;travel(Lnet/minecraft/util/math/Vec3d;)V"))
     private void observations$crosshairBasedMovement(LivingEntity entity, Vec3d movementInput, Operation<Void> original) {
 
@@ -57,11 +58,14 @@ public abstract class LivingEntityMixin extends Entity {
         this.calculateDimensions();
     }
 
+    //Trait: Weightless
     @WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;isFallFlying()Z"))
     private boolean observations$updateRoll(LivingEntity entity, Operation<Boolean> original) {
-        return (entity instanceof PlayerEntity player && TraitUtil.isWeightlessFlying(player) && player.isSprinting()) || original.call(entity);
+        return (entity instanceof PlayerEntity player && TraitUtil.isWeightlessFlying(player) && !player.horizontalCollision && player.isSprinting()) || original.call(entity);
     }
 
+    //Trait: Weightless
+    //This doesn't work outside of singleplayer for some reason
     @WrapOperation(method = "takeKnockback", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/math/Vec3d;multiply(D)Lnet/minecraft/util/math/Vec3d;"))
     private Vec3d observations$receiveIncreasedKnockback(Vec3d vector, double value, Operation<Vec3d> original) {
         LivingEntity entity = (LivingEntity) (Object) this;

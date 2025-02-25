@@ -5,6 +5,10 @@
   "mixins": [
     "accessor.EntityAccessor",
     "hailey.PlayerEntityMixin",
+    "kajo.PlayerEntityMixin",
+    "nickel.LivingEntityMixin",
+    "nopeable.HungerManagerMixin",
+    "nopeable.PlayerEntityMixin",
     "pom.HungerManagerMixin",
     "pom.ItemStackMixin",
     "shiny.EntityMixin",
@@ -19,11 +23,12 @@
   },
   "client": [
     "accessor.ItemRendererAccessor",
+    "client.nickel.MinecraftClientMixin",
     "client.pipobutter.BackgroundRendererMixin",
     "client.pom.MinecraftClientMixin",
-    "client.shiny.PlayerEntityModelMixin",
     "client.shiny.ClientPlayerEntityMixin",
     "client.shiny.ElytraSoundInstanceMixin",
+    "client.shiny.PlayerEntityModelMixin",
     "client.shiny.PlayerEntityRendererMixin",
     "client.vann1e_.ClientPlayerEntityMixin",
     "client.vann1e_.PlayerEntityRendererMixin"
