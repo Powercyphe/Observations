@@ -56,8 +56,9 @@ public enum Trait {
     // KAJ0JAJ0
     //Done
     SOULLESS_CREATURE("You're not really alive, so most monsters don't attack you, but since you're not alive you don't have natural regeneration."),
+    //Done
     STRONG_HANDS_EVEN_STRONGER_MORALS("Increased attack damage in sunlight, but you can't get any player lower than half a heart."),
-    //Done; use a cooldown system instead of running every second based on age
+    //Done (although it could be that kajo wants health to regen in sunlight and not hunger lmao)
     PHOTOSYNTHESIS("Being a plant makes it so you can't eat food, you have to rely on a source of light."),
 
     // PIPOBUTTER
