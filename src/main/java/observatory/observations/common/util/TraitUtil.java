@@ -42,7 +42,7 @@ public class TraitUtil {
 
     public static boolean isWeightlessFlying(PlayerEntity player) {
         if (player != null && ModComponents.TRAIT.getNullable(player) != null) {
-            return TraitComponent.get(player).hasTrait(Trait.INFINITE_FREEDOM)
+            return TraitComponent.get(player).hasTrait(Trait.WEIGHTLESS)
                     && !player.isSwimming()
                     && !player.isUsingRiptide()
                     && !player.isFallFlying()

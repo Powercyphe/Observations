@@ -61,11 +61,9 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
         if (entity instanceof LivingEntity && TraitComponent.get(player).hasTrait(Trait.STRONG_HANDS_EVEN_STRONGER_MORALS)) {
             if (((LivingEntity) entity).getHealth() - amount <= 0.0) {
-                Observations.LOGGER.info("Attacker cannot kill the target!");
                 return false;
             }
             else if (TraitUtil.isInSunlight(player)){
-                Observations.LOGGER.info("Attacker is in sunlight!");
                 amount *= 1.2f;
             }
         }
@@ -79,11 +77,9 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
         if (TraitComponent.get(player).hasTrait(Trait.STRONG_HANDS_EVEN_STRONGER_MORALS)) {
             if (entity.getHealth() - amount <= 0.0) {
-                Observations.LOGGER.info("Attacker cannot kill the target!");
                 return false;
             }
             else if (TraitUtil.isInSunlight(player)){
-                Observations.LOGGER.info("Attacker is in sunlight!");
                 amount *= 1.2f;
             }
         }

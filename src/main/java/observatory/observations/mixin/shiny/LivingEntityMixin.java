@@ -8,7 +8,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import observatory.observations.common.component.TraitComponent;
-import observatory.observations.common.registry.ModComponents;
 import observatory.observations.common.registry.Trait;
 import observatory.observations.common.util.TraitUtil;
 import observatory.observations.mixin.accessor.EntityAccessor;
@@ -17,6 +16,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityMixin extends Entity {
@@ -25,8 +25,27 @@ public abstract class LivingEntityMixin extends Entity {
     @Shadow public abstract void updateLimbs(boolean flutter);
     @Shadow @Final public LimbAnimator limbAnimator;
 
+    @Unique private boolean wasSprinting = false;
+
     public LivingEntityMixin(EntityType<?> type, World world) {
         super(type, world);
+    }
+
+    //Trait: Weightless
+    @Inject(method = "tick", at = @At(value = "HEAD"))
+    private void observations$updateFlyingDimensions(CallbackInfo ci) {
+        LivingEntity entity = (LivingEntity) (Object) this;
+
+        if (entity instanceof PlayerEntity player && TraitComponent.get(player).hasTrait(Trait.WEIGHTLESS)) {
+            if (this.isSprinting() && !this.wasSprinting) {
+                this.calculateDimensions();
+                this.wasSprinting = true;
+            }
+            else if (!this.isSprinting() && this.wasSprinting) {
+                this.calculateDimensions();
+                this.wasSprinting = false;
+            }
+        }
     }
 
     //Trait: Weightless
@@ -55,7 +74,6 @@ public abstract class LivingEntityMixin extends Entity {
         else {
             original.call(entity, movementInput);
         }
-        this.calculateDimensions();
     }
 
     //Trait: Weightless
