@@ -5,6 +5,7 @@
   "mixins": [
     "accessor.EntityAccessor",
     "hailey.PlayerEntityMixin",
+    "kajo.LivingEntityMixin",
     "kajo.PlayerEntityMixin",
     "nickel.LivingEntityMixin",
     "nopeable.HungerManagerMixin",
