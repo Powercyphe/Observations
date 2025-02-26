@@ -18,15 +18,12 @@ public class ModComponents implements EntityComponentInitializer {
             ComponentRegistry.getOrCreate(Observations.id("water_skipping"), WaterSkippingComponent.class);
     public static final ComponentKey<LikeVoidComponent> LIKE_VOID =
             ComponentRegistry.getOrCreate(Observations.id("like_void"), LikeVoidComponent.class);
-    public static final ComponentKey<WeightlessComponent> WEIGHTLESS =
-            ComponentRegistry.getOrCreate(Observations.id("weightless"), WeightlessComponent.class);
 
     @Override
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
         registry.registerForPlayers(TRAIT, TraitComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
         registry.registerForPlayers(BUDDING, BuddingComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
         registry.registerForPlayers(WATER_SKIPPING, WaterSkippingComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
-        registry.registerForPlayers(WEIGHTLESS, WeightlessComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
         registry.registerForPlayers(LIKE_VOID, LikeVoidComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
     }
 

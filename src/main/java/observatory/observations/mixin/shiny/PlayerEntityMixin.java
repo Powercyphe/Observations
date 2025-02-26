@@ -12,17 +12,20 @@ import observatory.observations.common.component.LikeVoidComponent;
 import observatory.observations.common.component.TraitComponent;
 import observatory.observations.common.registry.Trait;
 import observatory.observations.common.util.TraitUtil;
+import observatory.observations.common.util.FlyingAngleStorable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PlayerEntity.class)
-public abstract class PlayerEntityMixin extends LivingEntity {
+public abstract class PlayerEntityMixin extends LivingEntity implements FlyingAngleStorable {
 
     @Shadow public abstract void addExhaustion(float exhaustion);
+    @Unique private double prevAngle = 0.0;
 
     protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
@@ -88,5 +91,15 @@ public abstract class PlayerEntityMixin extends LivingEntity {
             return EntityDimensions.changing(0.7f, 0.8f);
         }
         else return super.getDimensions(pose);
+    }
+
+    @Override
+    public void observations$setAngle(double angle) {
+        this.prevAngle = angle;
+    }
+
+    @Override
+    public double observations$getAngle() {
+        return this.prevAngle;
     }
 }

@@ -7,10 +7,12 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import observatory.observations.Observations;
 import observatory.observations.common.component.TraitComponent;
 import observatory.observations.common.registry.Trait;
 import observatory.observations.common.util.TraitUtil;
 import observatory.observations.mixin.accessor.EntityAccessor;
+import observatory.observations.mixin.accessor.LivingEntityAccessor;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -76,7 +78,6 @@ public abstract class LivingEntityMixin extends Entity {
         }
     }
 
-    //Trait: Weightless
     @WrapOperation(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;isFallFlying()Z"))
     private boolean observations$updateRoll(LivingEntity entity, Operation<Boolean> original) {
         return (entity instanceof PlayerEntity player && TraitUtil.isWeightlessFlying(player) && !player.horizontalCollision && player.isSprinting()) || original.call(entity);
