@@ -33,7 +33,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     @ModifyReturnValue(method = "canFoodHeal", at = @At(value = "RETURN"))
     private boolean observations$preventRegen(boolean original) {
         PlayerEntity player = (PlayerEntity) (Object) this;
-        return !TraitComponent.get(player).hasTrait(Trait.SOULLESS_CREATURE);
+        return original && !TraitComponent.get(player).hasTrait(Trait.SOULLESS_CREATURE);
     }
 
     //Trait: Photosynthesis

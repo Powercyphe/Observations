@@ -87,8 +87,11 @@ public enum Trait {
     ACROBATICS("You have an increased movement speed and jump height.", TraitUtil.multiplyTotalModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.00015), TraitUtil.multiplyTotalModifier(AdditionalEntityAttributes.JUMP_HEIGHT, 1.2)),
 
     // SHINY
+    //Done
     WEIGHTLESS("You benefit from complete weightlessness, rendering you immune to the forces of gravity, amplifying your sprinting speed in the air and resulting in twice as much knockback received."),
+    //Done (inside weightless)
     INFINITE_FREEDOM("Not being limited to the ground, you can move freely in the air. Forwards or backwards movement on your behalf is no longer purely horizontal."),
+    //Done; add additional items to the observations:projectile_weapons tag
     LIKE_VOID("Having virtually no mass, you possess little strength. Projectile-based weapons refuse your command. Receiving damage past a certain threshold in a single attack renders you incapacitated, temporarily preventing you from moving.");
 
     private final String id;
