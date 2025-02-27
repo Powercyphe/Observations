@@ -5,7 +5,6 @@ import dev.onyxstudios.cca.api.v3.component.tick.CommonTickingComponent;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
-import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
@@ -15,8 +14,6 @@ import net.minecraft.util.collection.DefaultedList;
 import observatory.observations.common.registry.ModComponents;
 import observatory.observations.common.registry.Trait;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.UUID;
 
 public class TraitComponent implements AutoSyncedComponent, CommonTickingComponent {
     private static final String TRAITS_KEY = "traits";
@@ -64,14 +61,10 @@ public class TraitComponent implements AutoSyncedComponent, CommonTickingCompone
 
     public void clearAttributeModifiers() {
         if (!this.traits.isEmpty()) {
-            //Gets all traits provided by the component
             for (Trait trait : this.traits) {
-
-                //Gets all Attributes and their modifiers as provided by each trait
                 for (Pair<EntityAttribute, EntityAttributeModifier> pair : trait.getModifiedAttributes()) {
                     EntityAttributeInstance entityAttributeInstance = this.player.getAttributeInstance(pair.getLeft());
 
-                    //Removes modifiers provided by the trait
                     if (entityAttributeInstance != null && entityAttributeInstance.hasModifier(pair.getRight())) {
                         entityAttributeInstance.removeModifier(pair.getRight());
                     }
@@ -106,6 +99,41 @@ public class TraitComponent implements AutoSyncedComponent, CommonTickingCompone
         clearAttributeModifiers();
         this.traits.clear();
         sync();
+    }
+
+    public boolean copyTraits(PlayerEntity fromPlayer) {
+        boolean bl = false;
+        if (!fromPlayer.getUuid().equals(this.player.getUuid())) {
+            DefaultedList<Trait> traits = get(fromPlayer).getTraits();
+
+            if (!traits.isEmpty()) {
+                for (Trait trait : traits) {
+                    if (!this.traits.contains(trait) && !(trait == Trait.CRESCENT_THIEF)) {
+                        trait.setCopied(true);
+                        this.addTrait(trait);
+                        bl = true;
+                    }
+                }
+            }
+        }
+        return bl;
+    }
+
+    public boolean clearCopiedTraits() {
+        boolean bl = false;
+
+        DefaultedList<Trait> clearableTraits = DefaultedList.of();
+        for (Trait trait : this.traits) {
+            if (trait.isCopied()) clearableTraits.add(trait);
+        }
+
+        if (!clearableTraits.isEmpty()) {
+            for (Trait trait : clearableTraits) {
+                this.traits.remove(trait);
+                bl = true;
+            }
+        }
+        return bl;
     }
 
     public DefaultedList<Trait> getTraits() {

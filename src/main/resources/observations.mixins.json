@@ -13,6 +13,7 @@
     "nopeable.PlayerEntityMixin",
     "pom.HungerManagerMixin",
     "pom.ItemStackMixin",
+    "rafsa.PlayerEntityMixin",
     "shiny.EntityMixin",
     "shiny.ItemStackMixin",
     "shiny.LivingEntityMixin",

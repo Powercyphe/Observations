@@ -51,7 +51,8 @@ public enum Trait {
     WEIGHED_DOWN("Increased knockback resistance, but constant slowness", TraitUtil.additionModifier(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 0.3), TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, -0.15)),
 
     // PLURIXITY
-    CRESCENT_THIEF("Copies the nearest Players abilities"),
+    //Done
+    CRESCENT_THIEF("Copies the nearest player's abilities."),
 
     // KAJ0JAJ0
     //Done
@@ -72,8 +73,10 @@ public enum Trait {
     ACCELERATION_MATRIX("because I am frictionless the longer I run the faster I go, and at certain thresholds I gain positive effects. The first is increased attack speed (3X), then even faster I’ll just do damage to people by running into people, and at “maximum” speed I can run on water (and lava if wearing netherite boots), all with the caveat that the faster I go, if I were to crash, I take exponentially increased damage."),
 
     // RAFSA
-    STRONGER_THAN_STONE("After being in the caves so long, you have had stone, moss and anything that doesn't or has yet to exist make its home on your body, making you tankier (+2 hearts) but being extremely slow (slowness 2)."),
-    WILL_TO_LIVE_ON("While the infection still tries to weaken you, (less mining speed on everything) your pure determination to live on allows you to have higher stats based on health (+4% to general stats, speed both movement and attack, damage, etc. (just copy divine intervention from nope i aint being original fuck allat) per half-heart lost)."),
+    //Done
+    STRONGER_THAN_STONE("After being in the caves so long, you have had stone, moss and anything that doesn't or has yet to exist make its home on your body, making you tankier (+2 hearts) but being extremely slow (slowness 2).", TraitUtil.additionModifier(EntityAttributes.GENERIC_MAX_HEALTH, 2), TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, -0.3)),
+    WILL_TO_LIVE_ON("While the infection still tries to weaken you, (less mining speed on everything) your pure determination to live on allows you to have higher stats based on health (+4% to general stats, speed both movement and attack, damage, etc. (just copy divine intervention from nope i aint being original fuck allat) per half-heart lost).", TraitUtil.multiplyBaseModifier(AdditionalEntityAttributes.DIG_SPEED, -0.25)),
+    //Done
     INFECTION("While you are tall and strong, you aren't immune to disease and corruption, being infected by an indescribable, unkillable infection, only weakened by heat, and while it hides under your hard exterior, it takes your energy and gives you its weaknesses, making you weaker to fire (fire/lava) but stronger against frost (freeze/frostbite)."),
 
     // WINTER
@@ -82,9 +85,12 @@ public enum Trait {
     AURIC_ARTERIES("Your defense is increased.", TraitUtil.additionModifier(EntityAttributes.GENERIC_ARMOR, 6)),
 
     // POM
+    //Done
     LINE_OF_SIGHT("Players that are looked at will be highlighted for you."),
+    //Done
     NO_ENZYMES("You cannot get hungry or eat, but you regenerate health faster."),
-    ACROBATICS("You have an increased movement speed and jump height.", TraitUtil.multiplyTotalModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.00015), TraitUtil.multiplyTotalModifier(AdditionalEntityAttributes.JUMP_HEIGHT, 1.2)),
+    //Done
+    ACROBATICS("You have an increased movement speed and jump height.", TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25), TraitUtil.multiplyBaseModifier(AdditionalEntityAttributes.JUMP_HEIGHT, 1.2)),
 
     // SHINY
     //Done
@@ -96,11 +102,13 @@ public enum Trait {
 
     private final String id;
     private final DefaultedList<Pair<EntityAttribute, EntityAttributeModifier>> attributes;
+    private boolean wasCopied;
 
 
     Trait(String description, Pair<EntityAttribute, EntityAttributeModifier>... entityAttributeModifiers) {
         this.id = this.toString().toLowerCase(Locale.ROOT);
         this.attributes = DefaultedList.copyOf(TraitUtil.additionModifier(EntityAttributes.GENERIC_LUCK, 0), entityAttributeModifiers);
+        this.wasCopied = false;
     }
 
     public String getId() {
@@ -128,5 +136,13 @@ public enum Trait {
         }
 
         return null;
+    }
+
+    public void setCopied(boolean wasCopied) {
+        this.wasCopied = wasCopied;
+    }
+
+    public boolean isCopied() {
+        return this.wasCopied;
     }
 }
