@@ -2,6 +2,7 @@ package observatory.observations.mixin.shiny;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
@@ -81,6 +82,11 @@ public abstract class PlayerEntityMixin extends LivingEntity implements FlyingAn
         if (TraitComponent.get(player).hasTrait(Trait.WEIGHTLESS)) {
             cir.setReturnValue(false);
         }
+    }
+
+    @WrapWithCondition(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;setSprinting(Z)V"))
+    private boolean observations$staySprinting(PlayerEntity player, boolean value) {
+        return !TraitUtil.isWeightlessFlying(player);
     }
 
     @Override

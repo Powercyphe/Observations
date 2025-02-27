@@ -13,7 +13,7 @@ import java.util.Locale;
 
 public enum Trait {
 
-    // NICKEL
+    // NICKEL (he left so these don't need to be finished lol)
     //Done
     HALF_GILLS("When touching any water, gain conduit power, but when not touching water gain weakness."),
     TOP_OF_THE_FOOD_CHAIN("All hostile underwater mobs are passive, but dolphins are always aggressive."),
@@ -32,18 +32,19 @@ public enum Trait {
     //Done
     OBVIOUS_CRACKS("Pickaxes deal double damage to you and slow you down upon hit."),
 
-    // NOPEABLE
+    // NOPEABLE (these might be changed to something else? screw you nopeable!!)
     //Done
     DIVINE_INTERVENTION("You have a 15% buff in many minor stats, this includes but is not limited to, attack damage, speed, attack speed, hunger and regeneration.", TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE, 0.15), TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_ATTACK_SPEED, 0.15), TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.15)),
     ADRENALINE("All of your previous buffs are instead increased to a 25% increase when your on 3 hearts or less."),
     DISARMED("You do not have your left arm. You cannot use your offhand or use items like reloading a Crossbow or holding an Amarite Longsword."),
 
-    // HARPER
+    // HARPER (bruh drug abuse why do I have to make this)
     SHAPES_AND_COLOURS("After 5 minutes, there is a 50% chance for me to get a screen effect that simulates the effects of drugs for 1 minute."),
     NUTRITIONAL("Her nutritional gas and inability  to remove the mask causes her to no longer be able to eat or drink potions, for slower hunger regeneration."),
     GASSED_UP("The permanent high effecting her body has caused her to gain more energy and her neurons to fire faster."),
 
     // HAILEY
+    //Done
     WEEEE("Allows you to throw entities 3-4 blocks in the air when hitting them with your hands"),
     //Done
     HEAVY_HITTER("Decreased attack speed, increased attack damage", TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE, 0.5), TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_ATTACK_SPEED, -0.75)),
