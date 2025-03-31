@@ -14,7 +14,8 @@
 			"observations:budding",
 			"observations:water_skipping",
 			"observations:like_void",
-			"observations:copy_trait"
+			"observations:copy_trait",
+			"observations:gravity"
 		]
 	},
 	"accessWidener": "observations.accesswidener",

@@ -73,6 +73,11 @@ public enum Trait {
     TALL("Step height is increased to a full block."),
     ACCELERATION_MATRIX("because I am frictionless the longer I run the faster I go, and at certain thresholds I gain positive effects. The first is increased attack speed (3X), then even faster I’ll just do damage to people by running into people, and at “maximum” speed I can run on water (and lava if wearing netherite boots), all with the caveat that the faster I go, if I were to crash, I take exponentially increased damage."),
 
+    // EVEREST
+    STELLAR_FEEDER("During the night time, i can look up at the sky to get food ( NOT SATURATION ), max of three bars,  and constellation particles are present"),
+    GRAVITY_CORE("Slow falling 3 when more than 3 blocks away from the ground, but no fall damage"),
+    ENTROPY_PULSE("Consumable items have a 10% chance to not be used but stay in inventory, but also a 15% chance to get consumed and not used"),
+
     // RAFSA
     //Done
     STRONGER_THAN_STONE("After being in the caves so long, you have had stone, moss and anything that doesn't or has yet to exist make its home on your body, making you tankier (+2 hearts) but being extremely slow (slowness 2).", TraitUtil.additionModifier(EntityAttributes.GENERIC_MAX_HEALTH, 2), TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, -0.3)),
