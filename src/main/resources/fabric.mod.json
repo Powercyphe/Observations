@@ -15,7 +15,8 @@
 			"observations:water_skipping",
 			"observations:like_void",
 			"observations:copy_trait",
-			"observations:gravity"
+			"observations:gravity",
+			"observations:stellar_feeder"
 		]
 	},
 	"accessWidener": "observations.accesswidener",

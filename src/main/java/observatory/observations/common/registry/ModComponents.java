@@ -22,6 +22,8 @@ public class ModComponents implements EntityComponentInitializer {
             ComponentRegistry.getOrCreate(Observations.id("copy_trait"), CopyTraitComponent.class);
     public static final ComponentKey<GravityComponent> GRAVITY =
             ComponentRegistry.getOrCreate(Observations.id("gravity"), GravityComponent.class);
+    public static final ComponentKey<StellarFeederComponent> STELLAR_FEEDER =
+            ComponentRegistry.getOrCreate(Observations.id("stellar_feeder"), StellarFeederComponent.class);
 
     @Override
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
@@ -31,6 +33,6 @@ public class ModComponents implements EntityComponentInitializer {
         registry.registerForPlayers(LIKE_VOID, LikeVoidComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
         registry.registerForPlayers(COPY_TRAIT, CopyTraitComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
         registry.registerForPlayers(GRAVITY, GravityComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
+        registry.registerForPlayers(STELLAR_FEEDER, StellarFeederComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
     }
-
 }
