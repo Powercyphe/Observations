@@ -5,6 +5,7 @@
   "mixins": [
     "accessor.EntityAccessor",
     "accessor.LivingEntityAccessor",
+    "everest.LivingEntityMixin",
     "hailey.PlayerEntityMixin",
     "kajo.LivingEntityMixin",
     "kajo.PlayerEntityMixin",

@@ -1,0 +1,20 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:potion",
+    "minecraft:splash_potion",
+    "minecraft:lingering_potion",
+    "minecraft:milk_bucket",
+    "minecraft:honey_bottle",
+    "minecraft:ender_pearl",
+    "minecraft:firework_rocket",
+    "minecraft:fire_charge",
+    "minecraft:snowball",
+    "minecraft:egg",
+    "minecraft:totem_of_undying",
+    "minecraft:bottle_o_enchanting",
+    "minecraft:experience_bottle",
+    "minecraft:spectral_arrow",
+    "minecraft:tipped_arrow"
+  ]
+}

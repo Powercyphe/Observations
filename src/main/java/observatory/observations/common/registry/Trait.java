@@ -39,6 +39,7 @@ public enum Trait {
     DISARMED("You do not have your left arm. You cannot use your offhand or use items like reloading a Crossbow or holding an Amarite Longsword."),
 
     // HARPER (bruh drug abuse why do I have to make this)
+    // leave the shaders to me, ive already written it but i just need to implement it to this, if you're up for it you can make the cooldown tho
     SHAPES_AND_COLOURS("After 5 minutes, there is a 50% chance for me to get a screen effect that simulates the effects of drugs for 1 minute."),
     NUTRITIONAL("Her nutritional gas and inability  to remove the mask causes her to no longer be able to eat or drink potions, for slower hunger regeneration."),
     GASSED_UP("The permanent high effecting her body has caused her to gain more energy and her neurons to fire faster."),
@@ -72,6 +73,12 @@ public enum Trait {
     SLIPPERY("All blocks behave as ice, making me frictionless."),
     TALL("Step height is increased to a full block."),
     ACCELERATION_MATRIX("because I am frictionless the longer I run the faster I go, and at certain thresholds I gain positive effects. The first is increased attack speed (3X), then even faster I’ll just do damage to people by running into people, and at “maximum” speed I can run on water (and lava if wearing netherite boots), all with the caveat that the faster I go, if I were to crash, I take exponentially increased damage."),
+
+    // EVEREST
+    STELLAR_FEEDER("During the night time, i can look up at the sky to get food ( NOT SATURATION ), max of three bars,  and constellation particles are present"),
+    // done
+    GRAVITY_CORE("Slow falling 3 when more than 3 blocks away from the ground, but no fall damage"),
+    ENTROPY_PULSE("Consumable items have a 10% chance to not be used but stay in inventory, but also a 15% chance to get consumed and not used"),
 
     // RAFSA
     //Done
