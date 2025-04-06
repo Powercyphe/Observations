@@ -14,6 +14,10 @@ Trait controller for the Observatory Minecraft SMP
 - [@eeverest](https://github.com/thatoneaiguy)
 
 
+## Contributors
+- [@pomlmao](https://github.com/pomlmao)
+
+
 ## Badges
 
 ![CC0-1.0 License](https://img.shields.io/badge/License-CC0%201.0-f6f7f8?style=flat-square)
