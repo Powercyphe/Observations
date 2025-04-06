@@ -3,10 +3,11 @@
 	"id": "observations",
 	"version": "${version}",
 	"name": "Observations",
-	"description": "Traits",
+	"description": "Trait manager for the Observatory Minecraft SMP",
 	"authors": [
 		"Powercyphe",
-		"Shiny (8hiny)"
+		"Shiny (8hiny)",
+		"eeverest"
 	],
 	"custom": {
 		"cardinal-components": [
