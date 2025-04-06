@@ -174,5 +174,4 @@ public class TraitComponent implements AutoSyncedComponent, CommonTickingCompone
             sync();
         }
     }
-
 }
