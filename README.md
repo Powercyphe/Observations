@@ -1,8 +1,7 @@
 
 ![Logo](https://github.com/Powercyphe/Observations/blob/main/observatory%20logo.png?raw=true)
 
-
-# Observations
+---
 
 Trait controller for the Observatory Minecraft SMP
 
@@ -15,6 +14,7 @@ Trait controller for the Observatory Minecraft SMP
 
 
 ## Contributors
+### Artists
 - [@pomlmao](https://github.com/pomlmao)
 
 
