@@ -30,6 +30,7 @@
     "client.nickel.MinecraftClientMixin",
     "client.pipobutter.BackgroundRendererMixin",
     "client.pom.MinecraftClientMixin",
+    "client.qol.InventoryScreenMixin",
     "client.shiny.ClientPlayerEntityMixin",
     "client.shiny.ElytraSoundInstanceMixin",
     "client.shiny.PlayerEntityModelMixin",

@@ -75,9 +75,11 @@ public enum Trait {
     ACCELERATION_MATRIX("because I am frictionless the longer I run the faster I go, and at certain thresholds I gain positive effects. The first is increased attack speed (3X), then even faster I’ll just do damage to people by running into people, and at “maximum” speed I can run on water (and lava if wearing netherite boots), all with the caveat that the faster I go, if I were to crash, I take exponentially increased damage."),
 
     // EVEREST
+    // Done
     STELLAR_FEEDER("During the night time, i can look up at the sky to get food ( NOT SATURATION ), max of three bars,  and constellation particles are present"),
-    // done
+    // Done
     GRAVITY_CORE("Slow falling 3 when more than 3 blocks away from the ground, but no fall damage"),
+    // Done
     ENTROPY_PULSE("Consumable items have a 10% chance to not be used but stay in inventory, but also a 15% chance to get consumed and not used"),
 
     // RAFSA
@@ -144,6 +146,19 @@ public enum Trait {
         }
 
         return null;
+    }
+
+    public String formatTraitName(String traitName) {
+        String[] words = traitName.split("_");
+        StringBuilder formattedName = new StringBuilder();
+
+        for (String word : words) {
+            formattedName.append(word.substring(0, 1).toUpperCase());
+            formattedName.append(word.substring(1).toLowerCase());
+            formattedName.append(" ");
+        }
+
+        return formattedName.toString().trim();
     }
 
     public void setCopied(boolean wasCopied) {
