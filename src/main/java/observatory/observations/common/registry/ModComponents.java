@@ -24,6 +24,8 @@ public class ModComponents implements EntityComponentInitializer {
             ComponentRegistry.getOrCreate(Observations.id("gravity"), GravityComponent.class);
     public static final ComponentKey<StellarFeederComponent> STELLAR_FEEDER =
             ComponentRegistry.getOrCreate(Observations.id("stellar_feeder"), StellarFeederComponent.class);
+    public static final ComponentKey<NoEnzymesComponent> NO_ENZYMES =
+            ComponentRegistry.getOrCreate(Observations.id("no_enzymes"), NoEnzymesComponent.class);
 
     @Override
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
@@ -33,6 +35,6 @@ public class ModComponents implements EntityComponentInitializer {
         registry.registerForPlayers(LIKE_VOID, LikeVoidComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
         registry.registerForPlayers(COPY_TRAIT, CopyTraitComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
         registry.registerForPlayers(GRAVITY, GravityComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
-        registry.registerForPlayers(STELLAR_FEEDER, StellarFeederComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
+        registry.registerForPlayers(NO_ENZYMES, NoEnzymesComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
     }
 }
