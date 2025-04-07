@@ -73,6 +73,10 @@ public enum Trait {
     SLIPPERY("All blocks behave as ice, making me frictionless."),
     TALL("Step height is increased to a full block."),
     ACCELERATION_MATRIX("because I am frictionless the longer I run the faster I go, and at certain thresholds I gain positive effects. The first is increased attack speed (3X), then even faster I’ll just do damage to people by running into people, and at “maximum” speed I can run on water (and lava if wearing netherite boots), all with the caveat that the faster I go, if I were to crash, I take exponentially increased damage."),
+    // WAZZO BUT NEW???
+    BUG_LIKE_APPEARANCE("You look and see like a Bug. Other Arthropods will not attack you, and will be neutral if they were hostile towards you. You also have Compound Eyes and are immune to visual effects."),
+    SILK_SACK("In your inventory, you have a button on the right-side of your slots which you can click to open 6 extra slots. These slots are kept after death and can be hidden by pressing the button again."),
+    AGILE("You have extra mobility, you can stick to walls, climb up walls and wall-jump. In addition, you can jump higher.", TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25), TraitUtil.multiplyBaseModifier(AdditionalEntityAttributes.JUMP_HEIGHT, 1.2)),
 
     // EVEREST
     // Done
