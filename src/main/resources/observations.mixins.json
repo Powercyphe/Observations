@@ -26,9 +26,11 @@
     "defaultRequire": 1
   },
   "client": [
+    "accessor.BossBarHudAccessor",
     "accessor.ItemRendererAccessor",
     "client.nickel.MinecraftClientMixin",
     "client.pipobutter.BackgroundRendererMixin",
+    "client.pom.BossBarHudMixin",
     "client.pom.HudRendererMixin",
     "client.pom.MinecraftClientMixin",
     "client.qol.InventoryScreenMixin",

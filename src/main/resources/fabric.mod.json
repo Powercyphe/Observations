@@ -20,7 +20,8 @@
 			"observations:like_void",
 			"observations:copy_trait",
 			"observations:gravity",
-			"observations:stellar_feeder"
+			"observations:stellar_feeder",
+			"observations:no_enzymes"
 		]
 	},
 	"accessWidener": "observations.accesswidener",

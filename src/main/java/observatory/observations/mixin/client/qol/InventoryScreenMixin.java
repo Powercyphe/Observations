@@ -48,12 +48,21 @@ public class InventoryScreenMixin extends HandledScreen<PlayerScreenHandler> {
             int iconX = x + 4;
             int iconY = y + iteration * 26;
 
-            context.drawTexture(
-                    new Identifier("observations", "textures/gui/traits/background.png"),
-                    iconX - 6, iconY - 2,
-                    0, 0, 24, 24,
-                    24, 24
-            );
+            if (trait.isCopied()) {
+                context.drawTexture(
+                        new Identifier("observations", "textures/gui/traits/stolen_background.png"),
+                        iconX - 6, iconY - 2,
+                        0, 0, 24, 24,
+                        24, 24
+                );
+            } else {
+                context.drawTexture(
+                        new Identifier("observations", "textures/gui/traits/background.png"),
+                        iconX - 6, iconY - 2,
+                        0, 0, 24, 24,
+                        24, 24
+                );
+            }
 
             context.drawTexture(
                     new Identifier("observations", "textures/gui/traits/" + trait.getId() + ".png"),
