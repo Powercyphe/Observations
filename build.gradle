@@ -44,7 +44,7 @@ dependencies {
 
 	modImplementation("com.jamieswhiteshirt:reach-entity-attributes:${project.rea_version}")
 	modImplementation ("maven.modrinth:AdditionalEntityAttributes:${project.aea_version}+${project.minecraft_version}")
-	
+
 }
 
 processResources {
