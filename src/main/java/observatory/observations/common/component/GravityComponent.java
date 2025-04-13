@@ -28,6 +28,10 @@ public class GravityComponent implements ServerTickingComponent, AutoSyncedCompo
         return ModComponents.GRAVITY.get(player);
     }
 
+    public void sync() {
+        ModComponents.GRAVITY.sync(player);
+    }
+
     @Override
     public void serverTick() {
         World world = player.getWorld();

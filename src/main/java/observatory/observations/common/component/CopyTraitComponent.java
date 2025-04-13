@@ -17,6 +17,10 @@ public class CopyTraitComponent implements AutoSyncedComponent, ServerTickingCom
         this.provider = provider;
     }
 
+    public void sync() {
+        ModComponents.COPY_TRAIT.sync(provider);
+    }
+
     @Override
     public void serverTick() {
         if (this.copyCooldown > 0) {

@@ -4,6 +4,9 @@ import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.component.tick.CommonTickingComponent;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.entity.effect.StatusEffect;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.particle.BlockStateParticleEffect;
@@ -53,6 +56,8 @@ public class BuddingComponent implements AutoSyncedComponent, CommonTickingCompo
     @Override
     public void tick() {
         if (TraitComponent.get(this.player).hasTrait(Trait.GEODE_SOUL)) {
+
+
             if (isStandingOn(Blocks.BUDDING_AMETHYST) && this.buddingLevel < MAX_BUDDING_LEVEL) {
                 this.cooldown--;
                 if (this.cooldown <= 0) {
@@ -111,5 +116,4 @@ public class BuddingComponent implements AutoSyncedComponent, CommonTickingCompo
             default -> null;
         };
     }
-
 }

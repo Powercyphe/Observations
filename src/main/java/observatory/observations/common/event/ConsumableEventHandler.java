@@ -38,6 +38,15 @@ public class ConsumableEventHandler {
                     return TypedActionResult.success(stack);
                 }
             }
+            if (TraitComponent.get(player).hasTrait(Trait.NUTRITIONAL)) {
+                Item item = stack.getItem();
+                boolean isConsumable = item.isFood();
+
+                if (!isConsumable) return TypedActionResult.pass(stack);
+
+                return TypedActionResult.fail(stack);
+            }
+
             return TypedActionResult.pass(stack);
         });
     }

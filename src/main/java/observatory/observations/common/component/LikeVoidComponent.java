@@ -20,6 +20,10 @@ public class LikeVoidComponent implements AutoSyncedComponent, CommonTickingComp
         return ModComponents.LIKE_VOID.get(player);
     }
 
+    public void sync() {
+        ModComponents.LIKE_VOID.sync(provider);
+    }
+
     @Override
     public void tick() {
         if (this.remainingStunTicks > 0) this.remainingStunTicks--;

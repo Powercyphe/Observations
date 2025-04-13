@@ -8,6 +8,8 @@ import dev.onyxstudios.cca.api.v3.entity.RespawnCopyStrategy;
 import observatory.observations.Observations;
 import observatory.observations.common.component.*;
 
+import java.awt.*;
+
 public class ModComponents implements EntityComponentInitializer {
 
     public static final ComponentKey<TraitComponent> TRAIT =
@@ -26,6 +28,14 @@ public class ModComponents implements EntityComponentInitializer {
             ComponentRegistry.getOrCreate(Observations.id("stellar_feeder"), StellarFeederComponent.class);
     public static final ComponentKey<NoEnzymesComponent> NO_ENZYMES =
             ComponentRegistry.getOrCreate(Observations.id("no_enzymes"), NoEnzymesComponent.class);
+    public static final ComponentKey<NutritionalComponent> NUTRITIONAL =
+            ComponentRegistry.getOrCreate(Observations.id("nutritional"), NutritionalComponent.class);
+    public static final ComponentKey<SmokedLungsComponent> SMOKED_LUNGS =
+            ComponentRegistry.getOrCreate(Observations.id("smoked_lungs"), SmokedLungsComponent.class);
+    public static final ComponentKey<AgileComponent> AGILE =
+            ComponentRegistry.getOrCreate(Observations.id("agile"), AgileComponent.class);
+    public static final ComponentKey<ShapesAndColoursComponent> SHAPES_AND_COLOURS =
+            ComponentRegistry.getOrCreate(Observations.id("shapes_and_colours"), ShapesAndColoursComponent.class);
 
     @Override
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
@@ -36,5 +46,9 @@ public class ModComponents implements EntityComponentInitializer {
         registry.registerForPlayers(COPY_TRAIT, CopyTraitComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
         registry.registerForPlayers(GRAVITY, GravityComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
         registry.registerForPlayers(NO_ENZYMES, NoEnzymesComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
+        registry.registerForPlayers(NUTRITIONAL, NutritionalComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
+        registry.registerForPlayers(SMOKED_LUNGS, SmokedLungsComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
+        registry.registerForPlayers(AGILE, AgileComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
+        registry.registerForPlayers(SHAPES_AND_COLOURS, ShapesAndColoursComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
     }
 }
