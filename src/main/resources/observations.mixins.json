@@ -20,7 +20,8 @@
     "shiny.LivingEntityMixin",
     "shiny.PlayerEntityMixin",
     "vann1e_.LivingEntityMixin",
-    "vann1e_.PlayerEntityMixin"
+    "vann1e_.PlayerEntityMixin",
+    "winter.LivingEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

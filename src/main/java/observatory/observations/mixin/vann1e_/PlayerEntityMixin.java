@@ -35,9 +35,9 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     @ModifyVariable(method = "applyDamage", at = @At("HEAD"), index = 2, argsOnly = true)
     private float observations$geode_soul(float amount, DamageSource source) {
         PlayerEntity player = (PlayerEntity) (Object) this;
-        if (TraitComponent.get(player).hasTrait(Trait.GEODE_SOUL)) {
-            amount = amount / 2;
-        }
+//        if (TraitComponent.get(player).hasTrait(Trait.GEODE_SOUL)) {
+//            amount = amount / 2;
+//        }
         if (ModComponents.BUDDING.get(this).buddingLevel > 0
                 && source.getAttacker() != null && !player.isInvulnerableTo(source)) {
             BuddingComponent.get(player).decreaseBuddingLevel();

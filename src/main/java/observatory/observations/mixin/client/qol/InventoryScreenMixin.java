@@ -3,6 +3,7 @@ package observatory.observations.mixin.client.qol;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.gui.screen.ingame.InventoryScreen;
+import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.screen.PlayerScreenHandler;
@@ -14,6 +15,9 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 
@@ -24,8 +28,6 @@ public class InventoryScreenMixin extends HandledScreen<PlayerScreenHandler> {
     public InventoryScreenMixin(PlayerScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
     }
-
-    @Unique private float traitsOffset = 0;
 
     @Override
     public void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
@@ -41,7 +43,8 @@ public class InventoryScreenMixin extends HandledScreen<PlayerScreenHandler> {
         List<Trait> traits = TraitComponent.get(player).getTraits();
         if (traits.isEmpty()) return;
 
-        int x = this.x + this.backgroundWidth - 202 + (int)traitsOffset;
+        float traitsOffset = 0;
+        int x = this.x + this.backgroundWidth - 202 + (int) traitsOffset;
         int y = this.y + 2;
 
         for (int iteration = 0; iteration < traits.size(); iteration++) {

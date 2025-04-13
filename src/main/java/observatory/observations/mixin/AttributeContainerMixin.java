@@ -8,6 +8,8 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeInstance;
 import observatory.observations.common.util.AttributeEntityValue;
+import observatory.observations.mixin.client.pom.HudRendererMixin;
+import observatory.observations.mixin.client.qol.InventoryScreenMixin;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -44,7 +46,6 @@ public class AttributeContainerMixin implements AttributeEntityValue {
 
         return original;
     }
-
 
     @Inject(method = "getValue", at = @At("HEAD"))
     private void observations$attributeEntityValue(EntityAttribute attribute, CallbackInfoReturnable<Double> cir) {

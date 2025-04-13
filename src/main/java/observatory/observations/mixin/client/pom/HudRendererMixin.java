@@ -25,8 +25,6 @@ public abstract class HudRendererMixin {
     @Shadow private int scaledHeight;
     @Shadow private int scaledWidth;
 
-    @Shadow protected abstract void renderOverlay(DrawContext context, Identifier texture, float opacity);
-
     @Unique private static final Identifier HOTBAR_TEXTURE = new Identifier("observations", "textures/gui/pom_hotbar.png");
     @Unique private static final Identifier OVERLAY_TEXTURE = new Identifier("observations", "textures/gui/pom_overlay.png");
 

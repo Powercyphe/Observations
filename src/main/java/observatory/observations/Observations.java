@@ -7,6 +7,7 @@ import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
 import observatory.observations.common.cmd.TraitCommand;
 import observatory.observations.common.event.ConsumableEventHandler;
+import observatory.observations.common.event.SpiderAgroDisableTickEvent;
 import observatory.observations.common.registry.ModNetworking;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +26,7 @@ public class Observations implements ModInitializer {
 
 		// I'm so sorry i have to put this here i know its ugly
 		ConsumableEventHandler.register();
+		SpiderAgroDisableTickEvent.register();
 	}
 
 	public static Identifier id(String string) {

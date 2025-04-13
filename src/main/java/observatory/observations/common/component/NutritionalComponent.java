@@ -2,34 +2,30 @@ package observatory.observations.common.component;
 
 import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import dev.onyxstudios.cca.api.v3.component.tick.ServerTickingComponent;
-import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.NbtCompound;
 import observatory.observations.common.registry.ModComponents;
 import observatory.observations.common.registry.Trait;
-import org.jetbrains.annotations.NotNull;
 
-public class NoEnzymesComponent implements ServerTickingComponent, AutoSyncedComponent {
+public class NutritionalComponent implements ServerTickingComponent, AutoSyncedComponent {
     public PlayerEntity player;
 
-    public NoEnzymesComponent(PlayerEntity player) {
+    public NutritionalComponent(PlayerEntity player) {
         this.player = player;
     }
 
-    public static NoEnzymesComponent get(@NotNull PlayerEntity player) {
-        return ModComponents.NO_ENZYMES.get(player);
+    public static NutritionalComponent get(PlayerEntity player) {
+        return ModComponents.NUTRITIONAL.get(player);
     }
 
     public void sync() {
-        ModComponents.NO_ENZYMES.sync(player);
+        ModComponents.NUTRITIONAL.sync(player);
     }
 
     @Override
     public void serverTick() {
-        if (TraitComponent.get(player).hasTrait(Trait.NO_ENZYMES)) {
-            StatusEffectInstance regen = new StatusEffectInstance(StatusEffects.REGENERATION, 20, 0, true, false);
-            player.addStatusEffect(regen);
+        if (TraitComponent.get(player).hasTrait(Trait.STELLAR_FEEDER)) {
+            grantFood(player);
         }
     }
 
@@ -38,4 +34,10 @@ public class NoEnzymesComponent implements ServerTickingComponent, AutoSyncedCom
 
     @Override
     public void writeToNbt(NbtCompound nbtCompound) {}
+
+    private static void grantFood(PlayerEntity player) {
+        if (player.getWorld().getRandom().nextFloat() > 0.01) {
+            player.getHungerManager().add(1, 0);
+        }
+    }
 }
