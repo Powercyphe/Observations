@@ -39,9 +39,11 @@ public class BuddingFeatureRenderer<T extends LivingEntity, M extends BipedEntit
             matrixStack.push();
             matrixStack.peek().getPositionMatrix().translate(0f, (entity.getHeight() / 6), -0.03f);
             BlockState blockState = block.getDefaultState();
-            matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(170));
-            matrixStack.scale(0.9f, 0.9f, 0.9f);
-            matrixStack.translate(-0.5F, -0.5F, -0.5F);
+            //matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(170));
+            //matrixStack.scale(0.9f, 0.9f, 0.9f);
+            //matrixStack.translate(-0.5F, -0.5F, -0.5F);
+            matrixStack.translate(0f, 0.5f, 0.0f);
+            matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(90.0f));
             BakedModel model = this.blockRenderManager.getModel(blockState);
             model.getTransformation().getTransformation(ModelTransformationMode.NONE).apply(false, matrixStack);
             RenderLayer renderLayer = RenderLayers.getEntityBlockLayer(blockState, false);

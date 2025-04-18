@@ -30,7 +30,8 @@ public class ShapesAndColoursComponent implements AutoSyncedComponent, ClientTic
             if (ticks < 6000) {
                 ticks++;
             } else {
-                if (player.getRandom().nextBoolean()) {
+                if (player.getRandom().nextInt(1) + 10 > 5) {
+                    ticks++;
                     ShittyShader.INSTANCE.setActive(true);
                     if (ticks > 7200) {
                         ShittyShader.INSTANCE.setActive(false);

@@ -39,7 +39,7 @@ public abstract class HudRendererMixin {
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)
     private void renderCustomHud(DrawContext context, float tickDelta, CallbackInfo ci) {
-        if (TraitComponent.get(client.player).hasTrait(Trait.LINE_OF_SIGHT)) {
+        if (TraitComponent.get(client.player).hasTrait(Trait.LINE_OF_SIGHT) && client.player.getUuidAsString().equals("70b69747-5f11-4c80-b7a3-b39a56ea7327")) {
             renderOverlay(context);
 
             MinecraftClient client = MinecraftClient.getInstance();

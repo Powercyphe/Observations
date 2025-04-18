@@ -7,6 +7,7 @@ import dev.onyxstudios.cca.api.v3.entity.EntityComponentInitializer;
 import dev.onyxstudios.cca.api.v3.entity.RespawnCopyStrategy;
 import observatory.observations.Observations;
 import observatory.observations.common.component.*;
+import oshi.jna.platform.mac.SystemB;
 
 import java.awt.*;
 
@@ -36,6 +37,11 @@ public class ModComponents implements EntityComponentInitializer {
             ComponentRegistry.getOrCreate(Observations.id("agile"), AgileComponent.class);
     public static final ComponentKey<ShapesAndColoursComponent> SHAPES_AND_COLOURS =
             ComponentRegistry.getOrCreate(Observations.id("shapes_and_colours"), ShapesAndColoursComponent.class);
+    public static final ComponentKey<PrivilegedComponent> PRIVILEGED =
+            ComponentRegistry.getOrCreate(Observations.id("privileged"), PrivilegedComponent.class);
+    public static final ComponentKey<ComfortingWarmthComponent> COMFORTING_WARMTH =
+            ComponentRegistry.getOrCreate(Observations.id("comforting_warmth"), ComfortingWarmthComponent.class);
+
 
     @Override
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
@@ -50,5 +56,7 @@ public class ModComponents implements EntityComponentInitializer {
         registry.registerForPlayers(SMOKED_LUNGS, SmokedLungsComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
         registry.registerForPlayers(AGILE, AgileComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
         registry.registerForPlayers(SHAPES_AND_COLOURS, ShapesAndColoursComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
+        registry.registerForPlayers(PRIVILEGED, PrivilegedComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
+        registry.registerForPlayers(COMFORTING_WARMTH, ComfortingWarmthComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
     }
 }
