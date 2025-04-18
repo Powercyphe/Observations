@@ -5,6 +5,7 @@ import net.minecraft.item.Item;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
+import observatory.observations.common.cmd.GravitySoftlockFix;
 import observatory.observations.common.cmd.TraitCommand;
 import observatory.observations.common.event.ConsumableEventHandler;
 import observatory.observations.common.event.SpiderAgroDisableTickEvent;
@@ -23,6 +24,7 @@ public class Observations implements ModInitializer {
 	public void onInitialize() {
 		ModNetworking.init();
 		TraitCommand.init();
+		GravitySoftlockFix.init();
 
 		// I'm so sorry i have to put this here i know its ugly
 		ConsumableEventHandler.register();

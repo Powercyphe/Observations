@@ -6,8 +6,10 @@ import net.minecraft.entity.attribute.EntityAttribute;
 import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
 import net.minecraft.util.Pair;
 import net.minecraft.util.collection.DefaultedList;
+import observatory.observations.common.component.PrivilegedComponent;
 import observatory.observations.common.util.TraitUtil;
 import org.jetbrains.annotations.Nullable;
 
@@ -15,7 +17,7 @@ import java.util.Locale;
 
 public enum Trait {
 
-    // ! 5 MORE TO GO
+    // ! 1 MORE TO GO
 
     // * NICKEL (he left so these don't need to be finished lol)
     //Done
@@ -71,11 +73,11 @@ public enum Trait {
     PHOTOSYNTHESIS("Being a plant makes it so you can't eat food, you have to rely on a source of light."),
 
     // PIPOBUTTER
-    // !
+    // * Done
     MAGMA_COVERED("Because of your magma skin gain fire immunity and you can swim in lava just like water, but you cannot swim in water as you will sink because your skin rapidly cools."),
-    // !
+    // * Done
     FAMILIARITY("You're a nether born creature and others see you as neutral, if you attack them they will attack back."),
-    // !
+    // * Done
     COMFORTING_WARMTH("While being on fire you gain regen one and if inside of lava you have regen 2."),
 
     // WAZZO
@@ -107,7 +109,7 @@ public enum Trait {
     INFECTION("While you are tall and strong, you aren't immune to disease and corruption, being infected by an indescribable, unkillable infection, only weakened by heat, and while it hides under your hard exterior, it takes your energy and gives you its weaknesses, making you weaker to fire (fire/lava) but stronger against frost (freeze/frostbite)."),
 
     // WINTER
-    // !
+    // ?
     PRIVILEGED_PLATES("Gold armor has properties now."),
     // * Done
     SMOKED_LUNGS("You drown quicker and at high altitudes."),
