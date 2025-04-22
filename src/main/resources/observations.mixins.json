@@ -24,6 +24,7 @@
     "shiny.PlayerEntityMixin",
     "vann1e_.LivingEntityMixin",
     "vann1e_.PlayerEntityMixin",
+    "wazzo.LivingEntityMixin",
     "winter.LivingEntityMixin"
   ],
   "injectors": {
