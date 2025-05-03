@@ -11,6 +11,7 @@
     "kajo.PlayerEntityMixin",
     "nickel.LivingEntityMixin",
     "nopeable.HungerManagerMixin",
+    "nopeable.LivingEntityMixin",
     "nopeable.PlayerEntityMixin",
     "pipo.LivingEntityMixin",
     "pipo.MobEntityMixin",
@@ -24,7 +25,9 @@
     "shiny.PlayerEntityMixin",
     "vann1e_.LivingEntityMixin",
     "vann1e_.PlayerEntityMixin",
-    "winter.LivingEntityMixin"
+    "wazzo.LivingEntityMixin",
+    "winter.LivingEntityMixin",
+    "winter.PlayerEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
@@ -37,13 +40,13 @@
     "client.pom.BossBarHudMixin",
     "client.pom.HudRendererMixin",
     "client.pom.MinecraftClientMixin",
-    "client.qol.InventoryScreenMixin",
     "client.shiny.AbstractClientPlayerEntityMixin",
     "client.shiny.ClientPlayerEntityMixin",
     "client.shiny.ElytraSoundInstanceMixin",
     "client.shiny.PlayerEntityModelMixin",
     "client.shiny.PlayerEntityRendererMixin",
     "client.vann1e_.ClientPlayerEntityMixin",
-    "client.vann1e_.PlayerEntityRendererMixin"
+    "client.vann1e_.PlayerEntityRendererMixin",
+    "client.winter.ClientPlayerEntityMixin"
   ]
 }

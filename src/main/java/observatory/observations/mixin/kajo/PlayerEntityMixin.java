@@ -17,12 +17,16 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PlayerEntity.class)
 public abstract class PlayerEntityMixin extends LivingEntity {
 
     @Unique private int cooldownTicks = 0;
+
+    @Unique private static final int NIGHT_START = 13000;
+    @Unique private static final int NIGHT_END = 23000;
 
     protected PlayerEntityMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
@@ -68,6 +72,26 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         }
         return original.call(entity, source, amount);
     }
+
+    /*@ModifyVariable(
+            method = "damage(Lnet/minecraft/entity/damage/DamageSource;F)Z",
+            at = @At("HEAD"),
+            index = 2,
+            argsOnly = true
+    )
+    private float modifyDamage(float amount) {
+        PlayerEntity player = (PlayerEntity) (Object) this;
+
+        if (TraitComponent.get(player).hasTrait(Trait.STRONG_HANDS_EVEN_STRONGER_MORALS)) {
+            World world = player.getWorld();
+
+            long time = world.getTimeOfDay();
+            if (time <= NIGHT_START && time >= NIGHT_END) {
+                return amount * 2;
+            }
+        }
+        return amount;
+    }*/
 
     //Trait: Strong Hands
     @WrapOperation(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/LivingEntity;damage(Lnet/minecraft/entity/damage/DamageSource;F)Z"))

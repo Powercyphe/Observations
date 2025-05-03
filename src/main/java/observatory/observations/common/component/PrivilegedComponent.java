@@ -25,13 +25,13 @@ public class PrivilegedComponent implements AutoSyncedComponent, CommonTickingCo
         this.player = player;
     }
 
-    public static PrivilegedComponent get(PlayerEntity player) {
+    /*public static PrivilegedComponent get(PlayerEntity player) {
         return ModComponents.PRIVILEGED.get(player);
     }
 
     public void sync() {
         ModComponents.PRIVILEGED.sync(player);
-    }
+    }*/
 
     @Override
     public void tick() {

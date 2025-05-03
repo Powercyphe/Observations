@@ -16,9 +16,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Locale;
 
 public enum Trait {
-
-    // ! 1 MORE TO GO
-
     // * NICKEL (he left so these don't need to be finished lol)
     //Done
     HALF_GILLS("When touching any water, gain conduit power, but when not touching water gain weakness."),
@@ -43,6 +40,10 @@ public enum Trait {
     DIVINE_INTERVENTION("You have a 15% buff in many minor stats, this includes but is not limited to, attack damage, speed, attack speed, hunger and regeneration.", TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE, 0.15), TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_ATTACK_SPEED, 0.15), TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.15)),
     ADRENALINE("All of your previous buffs are instead increased to a 25% increase when your on 3 hearts or less."),
     DISARMED("You do not have your left arm. You cannot use your offhand or use items like reloading a Crossbow or holding an Amarite Longsword."),
+    // ALSO NOPEABLE
+    SQUISH("You can naturally move into smaller spaces easier. For example, you can go into crawl when sprinting into a 1 block tall opening"),
+    BANDIT("You're naturally faster and can wallrun.", TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.15)),
+    PICKPOCKET("You have constant looting from Mobs."),
 
     // *  HARPER (bruh drug abuse why do I have to make this)
     // * Done
@@ -87,7 +88,7 @@ public enum Trait {
     // WAZZO BUT NEW???
     // * Done
     BUG_LIKE_APPEARANCE("You look and see like a Bug. Other Arthropods will not attack you, and will be neutral if they were hostile towards you. You also have Compound Eyes and are immune to visual effects."),
-    // !
+    // * Done
     SILK_SACK("In your inventory, you have a button on the right-side of your slots which you can click to open 6 extra slots. These slots are kept after death and can be hidden by pressing the button again."),
     // * Done
     AGILE("You have extra mobility, you can stick to walls, climb up walls and wall-jump. In addition, you can jump higher.", TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25), TraitUtil.multiplyBaseModifier(AdditionalEntityAttributes.JUMP_HEIGHT, 1.2)),
@@ -104,12 +105,12 @@ public enum Trait {
     // * Done
     STRONGER_THAN_STONE("After being in the caves so long, you have had stone, moss and anything that doesn't or has yet to exist make its home on your body, making you tankier (+2 hearts) but being extremely slow (slowness 2).", TraitUtil.additionModifier(EntityAttributes.GENERIC_MAX_HEALTH, 2), TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, -0.3)),
     // * Done
-    WILL_TO_LIVE_ON("While the infection still tries to weaken you, (less mining speed on everything) your pure determination to live on allows you to have higher stats based on health (+4% to general stats, speed both movement and attack, damage, etc. (just copy divine intervention from nope i aint being original fuck allat) per half-heart lost).", TraitUtil.multiplyBaseModifier(AdditionalEntityAttributes.DIG_SPEED, -0.25), TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, 1.04), TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE, 1.04) , TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_ATTACK_SPEED, 1.04)),
+    WILL_TO_LIVE_ON("While the infection still tries to weaken you, (less mining speed on everything) your pure determination to live on allows you to have higher stats based on health (+4% to general stats, speed both movement and attack, damage, etc. (just copy divine intervention from nope i aint being original fuck allat) per half-heart lost)."),
     // * Done
     INFECTION("While you are tall and strong, you aren't immune to disease and corruption, being infected by an indescribable, unkillable infection, only weakened by heat, and while it hides under your hard exterior, it takes your energy and gives you its weaknesses, making you weaker to fire (fire/lava) but stronger against frost (freeze/frostbite)."),
 
     // WINTER
-    // ?
+    // * Done
     PRIVILEGED_PLATES("Gold armor has properties now."),
     // * Done
     SMOKED_LUNGS("You drown quicker and at high altitudes."),
@@ -129,13 +130,12 @@ public enum Trait {
     WEIGHTLESS("You benefit from complete weightlessness, rendering you immune to the forces of gravity, amplifying your sprinting speed in the air and resulting in twice as much knockback received."),
     // * Done (inside weightless)
     INFINITE_FREEDOM("Not being limited to the ground, you can move freely in the air. Forwards or backwards movement on your behalf is no longer purely horizontal."),
-    // * Done; add additional items to the observations:projectile_weapons tag
+    // * D  one; add additional items to the observations:projectile_weapons tag
     LIKE_VOID("Having virtually no mass, you possess little strength. Projectile-based weapons refuse your command. Receiving damage past a certain threshold in a single attack renders you incapacitated, temporarily preventing you from moving.");
 
     private final String id;
     private final DefaultedList<Pair<EntityAttribute, EntityAttributeModifier>> attributes;
     private boolean wasCopied;
-
 
     Trait(String description, Pair<EntityAttribute, EntityAttributeModifier>... entityAttributeModifiers) {
         this.id = this.toString().toLowerCase(Locale.ROOT);
@@ -190,4 +190,5 @@ public enum Trait {
     public boolean isCopied() {
         return this.wasCopied;
     }
+
 }
