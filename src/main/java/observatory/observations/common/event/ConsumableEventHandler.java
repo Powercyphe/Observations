@@ -3,6 +3,7 @@ package observatory.observations.common.event;
 import net.fabricmc.fabric.api.event.player.UseItemCallback;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.PotionItem;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.TypedActionResult;
@@ -40,7 +41,7 @@ public class ConsumableEventHandler {
             }
             if (TraitComponent.get(player).hasTrait(Trait.NUTRITIONAL)) {
                 Item item = stack.getItem();
-                boolean isConsumable = item.isFood();
+                boolean isConsumable = item.isFood() || item instanceof PotionItem;
 
                 if (!isConsumable) return TypedActionResult.pass(stack);
 

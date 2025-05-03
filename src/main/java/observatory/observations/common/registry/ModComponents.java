@@ -37,10 +37,14 @@ public class ModComponents implements EntityComponentInitializer {
             ComponentRegistry.getOrCreate(Observations.id("agile"), AgileComponent.class);
     public static final ComponentKey<ShapesAndColoursComponent> SHAPES_AND_COLOURS =
             ComponentRegistry.getOrCreate(Observations.id("shapes_and_colours"), ShapesAndColoursComponent.class);
-    public static final ComponentKey<PrivilegedComponent> PRIVILEGED =
-            ComponentRegistry.getOrCreate(Observations.id("privileged"), PrivilegedComponent.class);
+//    public static final ComponentKey<PrivilegedComponent> PRIVILEGED =
+//            ComponentRegistry.getOrCreate(Observations.id("privileged"), PrivilegedComponent.class);
     public static final ComponentKey<ComfortingWarmthComponent> COMFORTING_WARMTH =
             ComponentRegistry.getOrCreate(Observations.id("comforting_warmth"), ComfortingWarmthComponent.class);
+    public static final ComponentKey<SquishComponent> SQUISH =
+            ComponentRegistry.getOrCreate(Observations.id("squish"), SquishComponent.class);
+    public static final ComponentKey<WillToLiveOnComponent> WILL =
+            ComponentRegistry.getOrCreate(Observations.id("will"), WillToLiveOnComponent.class);
 
 
     @Override
@@ -56,7 +60,9 @@ public class ModComponents implements EntityComponentInitializer {
         registry.registerForPlayers(SMOKED_LUNGS, SmokedLungsComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
         registry.registerForPlayers(AGILE, AgileComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
         registry.registerForPlayers(SHAPES_AND_COLOURS, ShapesAndColoursComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
-        registry.registerForPlayers(PRIVILEGED, PrivilegedComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
+        //registry.registerForPlayers(PRIVILEGED, PrivilegedComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
         registry.registerForPlayers(COMFORTING_WARMTH, ComfortingWarmthComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
+        registry.registerForPlayers(SQUISH ,SquishComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
+        registry.registerForPlayers(WILL ,WillToLiveOnComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
     }
 }

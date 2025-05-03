@@ -25,9 +25,10 @@
 			"observations:nutritional",
 			"observations:smoked_lungs",
 			"observations:agile",
-			"observations:privileged",
 			"observations:shapes_and_colours",
-			"observations:comforting_warmth"
+			"observations:comforting_warmth",
+			"observations:squish",
+			"observations:will"
 		]
 	},
 	"accessWidener": "observations.accesswidener",

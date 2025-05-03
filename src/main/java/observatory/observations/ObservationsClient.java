@@ -19,7 +19,7 @@ public class ObservationsClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		ParticleFactoryRegistry.getInstance().register(SHOCKWAVE, ShockwaveParticle.Factory::new);
 
-		PostProcessHandler.addInstance(HeatShader.INSTANCE);
-		PostProcessHandler.addInstance(ShittyShader.INSTANCE);
+		//PostProcessHandler.addInstance(HeatShader.INSTANCE);
+		//PostProcessHandler.addInstance(ShittyShader.INSTANCE);
 	}
 }

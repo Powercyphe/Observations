@@ -15,17 +15,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(MobEntity.class)
 public class MobEntityMixin {
-    @Inject(
-            method = "setTarget",
-            at = @At("HEAD"),
-            cancellable = true
-    )
-    public void preventTargeting(LivingEntity target, CallbackInfo ci) {
-        if (isNetherMob((MobEntity) (Object) this) && target instanceof PlayerEntity player && TraitComponent.get(player).hasTrait(Trait.FAMILIARITY)) {
-            target = null;
-            ci.cancel();
-        }
-    }
+//    @Inject(
+//            method = "setTarget",
+//            at = @At("HEAD"),
+//            cancellable = true
+//    )
+//    public void preventTargeting(LivingEntity target, CallbackInfo ci) {
+//        if (isNetherMob((MobEntity) (Object) this) && target instanceof PlayerEntity player && TraitComponent.get(player).hasTrait(Trait.FAMILIARITY)) {
+//            target = null;
+//            ci.cancel();
+//        }
+//    }
 
     @Unique
     private static boolean isNetherMob(Entity entity) {

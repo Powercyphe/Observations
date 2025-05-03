@@ -10,5 +10,3 @@ accessible field net/minecraft/entity/LivingEntity jumping Z
 accessible method net/minecraft/entity/LivingEntity getJumpVelocity ()F
 accessible field net/minecraft/entity/mob/MobEntity targetSelector Lnet/minecraft/entity/ai/goal/GoalSelector;
 accessible field net/minecraft/entity/ai/goal/ActiveTargetGoal targetClass Ljava/lang/Class;
-accessible class net/minecraft/entity/mob/SpiderEntity$AttackGoal
-

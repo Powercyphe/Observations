@@ -4,6 +4,7 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.entity.*;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.loot.function.LootingEnchantLootFunction;
 import net.minecraft.world.World;
 import observatory.observations.common.component.TraitComponent;
 import observatory.observations.common.registry.Trait;
@@ -25,4 +26,6 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         }
         original.call(player, exhaustion);
     }
+
+
 }

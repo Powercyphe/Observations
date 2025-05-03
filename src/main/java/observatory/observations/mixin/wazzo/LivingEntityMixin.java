@@ -23,7 +23,7 @@ public class LivingEntityMixin extends MeleeAttackGoal {
         LivingEntity entity = this.mob.getTarget();
         if (entity instanceof PlayerEntity player && this.mob instanceof SpiderEntity spider) {
             System.out.println((spider.getLastAttacker() != player) + " " + !TraitComponent.get(player).hasTrait(Trait.BUG_LIKE_APPEARANCE));
-            return !(spider.getLastAttacker() != player && !TraitComponent.get(player).hasTrait(Trait.BUG_LIKE_APPEARANCE)) && original;
+            return !(spider.getLastAttacker() != player && !TraitComponent.get(player).hasTrait(Trait.BUG_LIKE_APPEARANCE)) && !original;
         }
         return original;
     }
