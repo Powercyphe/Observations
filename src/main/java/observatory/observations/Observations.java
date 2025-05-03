@@ -9,7 +9,6 @@ import observatory.observations.common.cmd.GravitySoftlockFix;
 import observatory.observations.common.cmd.SelfTraitCommand;
 import observatory.observations.common.cmd.TraitCommand;
 import observatory.observations.common.event.ConsumableEventHandler;
-import observatory.observations.common.event.SpiderAgroDisableTickEvent;
 import observatory.observations.common.registry.ModNetworking;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
