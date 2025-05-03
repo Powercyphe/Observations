@@ -55,8 +55,6 @@
 		"java": ">=17",
 		"fabric-api": "*",
 		"trinkets": "*",
-		"additionalentityattributes": "*",
-		"lodestone": "*",
-		"porting_lib": "*"
+		"additionalentityattributes": "*"
 	}
 }
