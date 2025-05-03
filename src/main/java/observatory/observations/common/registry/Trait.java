@@ -91,7 +91,7 @@ public enum Trait {
     // * Done
     SILK_SACK("In your inventory, you have a button on the right-side of your slots which you can click to open 6 extra slots. These slots are kept after death and can be hidden by pressing the button again."),
     // * Done
-    AGILE("You have extra mobility, you can stick to walls, climb up walls and wall-jump. In addition, you can jump higher.", TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25), TraitUtil.multiplyBaseModifier(AdditionalEntityAttributes.JUMP_HEIGHT, 1.2)),
+    AGILE("You have extra mobility, you can stick to walls, climb up walls and wall-jump. In addition, you can jump higher.", TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25), TraitUtil.multiplyBaseModifier(AdditionalEntityAttributes.JUMP_HEIGHT, 1.0)),
 
     // EVEREST
     // * Done

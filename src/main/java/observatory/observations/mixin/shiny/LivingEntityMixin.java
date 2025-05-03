@@ -90,7 +90,7 @@ public abstract class LivingEntityMixin extends Entity {
         LivingEntity entity = (LivingEntity) (Object) this;
 
         if (entity instanceof PlayerEntity player && TraitComponent.get(player).hasTrait(Trait.WEIGHTLESS)) {
-            value *= 5.0f;
+            value *= 4.0f;
         }
         return original.call(vector, value);
     }

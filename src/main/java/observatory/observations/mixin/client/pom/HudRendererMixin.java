@@ -39,7 +39,7 @@ public abstract class HudRendererMixin {
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)
     private void renderCustomHud(DrawContext context, float tickDelta, CallbackInfo ci) {
-        if (TraitComponent.get(client.player).hasTrait(Trait.LINE_OF_SIGHT) && client.player.getUuidAsString().equals("70b69747-5f11-4c80-b7a3-b39a56ea7327")) {
+        if (TraitComponent.get(client.player).hasTrait(Trait.LINE_OF_SIGHT) && client.player.getUuidAsString().equals("765ad8ec-ebe5-4754-ab33-a876ac783e6d")) {
             renderOverlay(context);
 
             MinecraftClient client = MinecraftClient.getInstance();
@@ -71,13 +71,6 @@ public abstract class HudRendererMixin {
         }
     }
 
-    @Inject(method = "renderStatusBars", at = @At("HEAD"), cancellable = true)
-    private void removeHearts(DrawContext context, CallbackInfo ci) {
-        if (TraitComponent.get(client.player).hasTrait(Trait.LINE_OF_SIGHT)) {
-            ci.cancel();
-        }
-    }
-
     @Unique
     private void renderOverlay(DrawContext context) {
         int screenWidth = this.scaledWidth;
@@ -102,93 +95,5 @@ public abstract class HudRendererMixin {
 
         RenderSystem.enableDepthTest();
         RenderSystem.disableBlend();
-    }
-
-    @Inject(method = "renderHotbar", at = @At("HEAD"), cancellable = true)
-    private void renderCustomHotbar(float tickDelta, DrawContext context, CallbackInfo ci) {
-        if (TraitComponent.get(client.player).hasTrait(Trait.LINE_OF_SIGHT)) {
-            PlayerEntity playerEntity = client.player;
-            if (playerEntity != null) {
-                ItemStack itemStack = playerEntity.getOffHandStack();
-                Arm arm = playerEntity.getMainArm().getOpposite();
-
-                int hotbarWidth = 182;
-                int slotWidth = 20;
-                int hotbarX = scaledWidth / 2 - hotbarWidth / 2;
-                int hotbarY = scaledHeight - 20;
-
-                context.getMatrices().push();
-                context.getMatrices().translate(0.0F, 0.0F, -90.0F);
-
-                context.drawTexture(HOTBAR_TEXTURE, hotbarX, hotbarY + 1, 0, 0, hotbarWidth, 22);
-
-                int selectedSlot = playerEntity.getInventory().selectedSlot;
-                context.drawTexture(HOTBAR_TEXTURE, hotbarX + selectedSlot * slotWidth, hotbarY, 0, 22, 24, 22);
-
-                if (!itemStack.isEmpty()) {
-                    if (arm == Arm.LEFT) {
-                        context.drawTexture(HOTBAR_TEXTURE, hotbarX - 29, hotbarY, 24, 22, 29, 24);
-                    } else {
-                        context.drawTexture(HOTBAR_TEXTURE, hotbarX + hotbarWidth, hotbarY, 53, 22, 29, 24);
-                    }
-                }
-                context.draw();
-                context.getMatrices().pop();
-
-                int l = 1;
-                for (int m = 0; m < 9; ++m) {
-                    int slotX = hotbarX + m * slotWidth + 3;
-                    int slotY = hotbarY + 4;
-                    this.renderHotbarItem(context, slotX, slotY, tickDelta, playerEntity, playerEntity.getInventory().main.get(m), l++);
-                }
-
-                if (!itemStack.isEmpty()) {
-                    int offhandSlotY = hotbarY - 3;
-                    if (arm == Arm.LEFT) {
-                        this.renderHotbarItem(context, hotbarX - 26, offhandSlotY, tickDelta, playerEntity, itemStack, l++);
-                    } else {
-                        this.renderHotbarItem(context, hotbarX + hotbarWidth + 10, offhandSlotY, tickDelta, playerEntity, itemStack, l++);
-                    }
-                }
-
-                RenderSystem.enableBlend();
-                if (this.client.options.getAttackIndicator().getValue() == AttackIndicator.HOTBAR) {
-                    float f = this.client.player.getAttackCooldownProgress(0.0F);
-                    if (f < 1.0F) {
-                        int n = scaledHeight - 20;
-                        int o = hotbarX + hotbarWidth + 6;
-                        if (arm == Arm.RIGHT) {
-                            o = hotbarX - 91 - 22;
-                        }
-
-                        int p = (int)(f * 19.0F);
-                    }
-                }
-
-                RenderSystem.disableBlend();
-            }
-            ci.cancel();
-        }
-    }
-
-    @Unique
-    private void renderHotbarItem(DrawContext context, int x, int y, float f, PlayerEntity player, ItemStack stack, int seed) {
-        if (!stack.isEmpty()) {
-            float g = (float)stack.getBobbingAnimationTime() - f;
-            if (g > 0.0F) {
-                float h = 1.0F + g / 5.0F;
-                context.getMatrices().push();
-                context.getMatrices().translate((float)(x + 8), (float)(y + 12), 0.0F);
-                context.getMatrices().scale(1.0F / h, (h + 1.0F) / 2.0F, 1.0F);
-                context.getMatrices().translate((float)(-(x + 8)), (float)(-(y + 12)), 0.0F);
-            }
-
-            context.drawItem(player, stack, x, y, seed);
-            if (g > 0.0F) {
-                context.getMatrices().pop();
-            }
-
-            context.drawItemInSlot(this.client.textRenderer, stack, x, y);
-        }
     }
 }

@@ -2,6 +2,7 @@ package observatory.observations.mixin.shiny;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import com.llamalad7.mixinextras.injector.v2.WrapWithCondition;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
@@ -89,14 +90,19 @@ public abstract class PlayerEntityMixin extends LivingEntity implements FlyingAn
         return !TraitUtil.isWeightlessFlying(player);
     }
 
-    @Override
-    public EntityDimensions getDimensions(EntityPose pose) {
+    @ModifyReturnValue(method = "getDimensions", at = @At(value = "RETURN"))
+    private EntityDimensions observations$flyingDimensions(EntityDimensions original) {
         PlayerEntity player = (PlayerEntity) (Object) this;
 
         if (TraitUtil.isWeightlessFlying(player) && !player.horizontalCollision && player.isSprinting()) {
             return EntityDimensions.changing(0.7f, 0.8f);
         }
-        else return super.getDimensions(pose);
+        return original;
+    }
+
+    @WrapOperation(method = "getBlockBreakingSpeed", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/player/PlayerEntity;isOnGround()Z"))
+    private boolean observations$sameBreakingSpeed(PlayerEntity player, Operation<Boolean> original) {
+        return original.call(player) || TraitUtil.isWeightlessFlying(player);
     }
 
     @Override

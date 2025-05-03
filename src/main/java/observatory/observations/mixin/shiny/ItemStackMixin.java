@@ -33,6 +33,6 @@ public abstract class ItemStackMixin {
         if (user instanceof PlayerEntity && TraitComponent.get((PlayerEntity) user).hasTrait(Trait.LIKE_VOID) && stack.isIn(Observations.PROJECTILE_WEAPONS)) {
             return false;
         }
-        else return true;
+        return true;
     }
 }

@@ -27,13 +27,6 @@ public abstract class LivingEntityMixin extends Entity {
         super(type, world);
     }
 
-    @Inject(method = "damage", at = @At("HEAD"), cancellable = true)
-    private void observations$removeLavaDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-        if ((LivingEntity) (Object) this instanceof PlayerEntity player && TraitComponent.get(player).hasTrait(Trait.MAGMA_COVERED)) {
-            cir.setReturnValue(source.isIn(DamageTypeTags.IS_FIRE));
-        }
-    }
-
     @ModifyReturnValue(method = "canTarget(Lnet/minecraft/entity/LivingEntity;)Z", at = @At(value = "RETURN"))
     private boolean observations$preventBeingTargeted(boolean original, LivingEntity target) {
         LivingEntity entity = (LivingEntity) (Object) this;
