@@ -1,36 +1,24 @@
 package observatory.observations.mixin.pipo;
 
-import net.fabricmc.fabric.impl.biome.modification.BuiltInRegistryKeys;
-import net.minecraft.block.BlockState;
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityPose;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.*;
 import net.minecraft.entity.passive.StriderEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.Fluid;
-import net.minecraft.fluid.FluidState;
-import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.DamageTypeTags;
-import net.minecraft.registry.tag.FluidTags;
-import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraft.world.dimension.DimensionTypes;
 import observatory.observations.common.component.TraitComponent;
 import observatory.observations.common.registry.Trait;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(LivingEntity.class)
@@ -39,11 +27,6 @@ public abstract class LivingEntityMixin extends Entity {
         super(type, world);
     }
 
-    public final RegistryKey<World> THE_NETHER = RegistryKey.of(
-            RegistryKeys.WORLD,
-            new Identifier("minecraft", "the_nether")
-    );
-
     @Inject(method = "damage", at = @At("HEAD"), cancellable = true)
     private void observations$removeLavaDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         if ((LivingEntity) (Object) this instanceof PlayerEntity player && TraitComponent.get(player).hasTrait(Trait.MAGMA_COVERED)) {
@@ -51,14 +34,25 @@ public abstract class LivingEntityMixin extends Entity {
         }
     }
 
-    @Inject(method = "canTarget(Lnet/minecraft/entity/LivingEntity;)Z", at = @At(value = "RETURN"), cancellable = true)
-    private void observations$preventBeingTargeted(LivingEntity target, CallbackInfoReturnable<Boolean> cir) {
+    @ModifyReturnValue(method = "canTarget(Lnet/minecraft/entity/LivingEntity;)Z", at = @At(value = "RETURN"))
+    private boolean observations$preventBeingTargeted(boolean original, LivingEntity target) {
         LivingEntity entity = (LivingEntity) (Object) this;
-
-        if (entity instanceof HostileEntity && entity.getWorld().getRegistryKey().equals(THE_NETHER) && target instanceof PlayerEntity player && TraitComponent.get(player).hasTrait(Trait.FAMILIARITY)) {
-            System.out.println("falseing iy");
-            cir.setReturnValue(false);
+        if (isNetherMob(entity) && target instanceof PlayerEntity player && TraitComponent.get(player).hasTrait(Trait.FAMILIARITY)) {
+            return false;
         }
-        else cir.setReturnValue(cir.getReturnValue());
+        return original;
+    }
+
+    @Unique
+    private static boolean isNetherMob(Entity entity) {
+        return entity instanceof BlazeEntity ||
+                entity instanceof GhastEntity ||
+                entity instanceof WitherSkeletonEntity ||
+                entity instanceof MagmaCubeEntity ||
+                entity instanceof PiglinEntity ||
+                entity instanceof PiglinBruteEntity ||
+                entity instanceof ZombifiedPiglinEntity ||
+                entity instanceof HoglinEntity ||
+                entity instanceof StriderEntity;
     }
 }

@@ -14,7 +14,6 @@
     "nopeable.LivingEntityMixin",
     "nopeable.PlayerEntityMixin",
     "pipo.LivingEntityMixin",
-    "pipo.MobEntityMixin",
     "pipo.PlayerEntityMixin",
     "pom.HungerManagerMixin",
     "pom.ItemStackMixin",
