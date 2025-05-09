@@ -57,9 +57,9 @@ public enum Trait {
     // * Done
     WEEEE("Allows you to throw entities 3-4 blocks in the air when hitting them with your hands"),
     // * Done
-    HEAVY_HITTER("Decreased attack speed, increased attack damage", TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE, 0.5), TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_ATTACK_SPEED, -0.75)),
+    HEAVY_HITTER("Decreased attack speed, increased attack damage", TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_ATTACK_DAMAGE, 0.5)),
     // * Done
-    WEIGHED_DOWN("Increased knockback resistance, but constant slowness", TraitUtil.additionModifier(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 0.3), TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, -0.15)),
+    WEIGHED_DOWN("Increased knockback resistance, but constant slowness", TraitUtil.additionModifier(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, 0.3), TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, -0.075)),
 
     // PLURIXITY
     // * Done
@@ -119,19 +119,24 @@ public enum Trait {
 
     // POM
     // * Done
-    LINE_OF_SIGHT("Players that are looked at will be highlighted for you."),
-    // * Done
     NO_ENZYMES("You cannot get hungry or eat, but you regenerate health faster."),
     // * Done
-    ACROBATICS("You have an increased movement speed and jump height.", TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25), TraitUtil.multiplyBaseModifier(AdditionalEntityAttributes.JUMP_HEIGHT, 1.2)),
+    LINE_OF_SIGHT("Players that are looked at will be highlighted for you."),
+    // * Done
+    ACROBATICS("You have an increased movement speed and jump height.", TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25), TraitUtil.multiplyBaseModifier(AdditionalEntityAttributes.JUMP_HEIGHT, 1.1)),
 
     // SHINY
     // * Done
     WEIGHTLESS("You benefit from complete weightlessness, rendering you immune to the forces of gravity, amplifying your sprinting speed in the air and resulting in twice as much knockback received."),
     // * Done (inside weightless)
     INFINITE_FREEDOM("Not being limited to the ground, you can move freely in the air. Forwards or backwards movement on your behalf is no longer purely horizontal."),
-    // * D  one; add additional items to the observations:projectile_weapons tag
-    LIKE_VOID("Having virtually no mass, you possess little strength. Projectile-based weapons refuse your command. Receiving damage past a certain threshold in a single attack renders you incapacitated, temporarily preventing you from moving.");
+    // * Done; add additional items to the observations:projectile_weapons tag
+    LIKE_VOID("Having virtually no mass, you possess little strength. Projectile-based weapons refuse your command. Receiving damage past a certain threshold in a single attack renders you incapacitated, temporarily preventing you from moving."),
+
+    // * Done
+    FIVE_BIG_BOOMS("Upon falling below 50% health, a five-second countdown initiates; failure to defuse results in a catastrophic self-detonation."),
+    // * Done (inside five big booms)
+    DEFUSAL("If the detonation timer is currently active jumping into water will cancel it.\n");
 
     private final String id;
     private final DefaultedList<Pair<EntityAttribute, EntityAttributeModifier>> attributes;

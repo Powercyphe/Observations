@@ -32,7 +32,7 @@ public class CopyTraitComponent implements AutoSyncedComponent, ServerTickingCom
             PlayerEntity fromPlayer = this.provider.getWorld().getClosestPlayer(this.provider.getX(), this.provider.getY(), this.provider.getZ(), 32, entity -> !entity.isSpectator() && entity!= this.provider);
             if (fromPlayer != null) {
                 if (TraitComponent.get(this.provider).copyTraits(fromPlayer)) {
-                    this.provider.sendMessage(Text.literal("Stole " + fromPlayer.getName().getString() + "'s traits!"), true);
+                    this.provider.sendMessage(Text.literal("Stole " + fromPlayer.getName().getString() + "'s traits!"));
                     this.copyCooldown = 1200;
                 }
             }

@@ -30,19 +30,19 @@ public class StellarFeederComponent implements ServerTickingComponent, AutoSynce
     @Override
     public void serverTick() {
         if (TraitComponent.get(player).hasTrait(Trait.STELLAR_FEEDER)) {
-            if (isNightTime(player.getWorld()) && isLookingUp(player)) {
+            if (player.getWorld().isNight() && isLookingUp(player)) {
                 grantFood(player);
             }
         }
     }
 
     @Override
-    public void readFromNbt(NbtCompound nbtCompound) {
+    public void readFromNbt(NbtCompound compound) {
 
     }
 
     @Override
-    public void writeToNbt(NbtCompound nbtCompound) {
+    public void writeToNbt(NbtCompound compound) {
 
     }
 
@@ -57,7 +57,7 @@ public class StellarFeederComponent implements ServerTickingComponent, AutoSynce
 
     private static void grantFood(PlayerEntity player) {
         if (player.getWorld().getRandom().nextFloat() > 0.7) {
-            player.getHungerManager().add(1, 0);
+            player.getHungerManager().add(2, 1);
         }
     }
 }

@@ -11,6 +11,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Arm;
 import net.minecraft.util.Identifier;
+import observatory.observations.Observations;
 import observatory.observations.common.component.TraitComponent;
 import observatory.observations.common.registry.Trait;
 import org.spongepowered.asm.mixin.Mixin;
@@ -39,7 +40,7 @@ public abstract class HudRendererMixin {
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)
     private void renderCustomHud(DrawContext context, float tickDelta, CallbackInfo ci) {
-        if (TraitComponent.get(client.player).hasTrait(Trait.LINE_OF_SIGHT) && client.player.getUuidAsString().equals("765ad8ec-ebe5-4754-ab33-a876ac783e6d")) {
+        if (TraitComponent.get(client.player).hasTrait(Trait.LINE_OF_SIGHT) && client.player.getUuidAsString().equals("765ad8ec-ebe5-4754-ab33-a876ac783e6d") && !Observations.safety) {
             renderOverlay(context);
 
             MinecraftClient client = MinecraftClient.getInstance();

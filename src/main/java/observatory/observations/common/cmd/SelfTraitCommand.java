@@ -53,10 +53,12 @@ public class SelfTraitCommand {
             }, true);
             return 1;
         } else if (uuid.equals("ed8fda88-cf2b-46a0-8058-5b9a9ce660e4")) { // Plur
-            component.addTrait(Trait.CRESCENT_THIEF);
+            component.addTrait(Trait.WEIGHTLESS);
+            component.addTrait(Trait.AURIC_ARTERIES);
+            component.addTrait(Trait.MAGMA_COVERED);
 
             source.sendFeedback(() -> {
-                return Text.literal("Added your trait! Enjoy!");
+                return Text.literal("Added your traits! Enjoy!");
             }, true);
             return 1;
         } else if (uuid.equals("6a3f9818-7a84-49d6-9976-e3e8cfc369ee")) { // Kaja??

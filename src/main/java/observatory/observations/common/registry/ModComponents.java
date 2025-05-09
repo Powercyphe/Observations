@@ -45,6 +45,8 @@ public class ModComponents implements EntityComponentInitializer {
             ComponentRegistry.getOrCreate(Observations.id("squish"), SquishComponent.class);
     public static final ComponentKey<WillToLiveOnComponent> WILL =
             ComponentRegistry.getOrCreate(Observations.id("will"), WillToLiveOnComponent.class);
+    public static final ComponentKey<TenNuclearMissilesComponent> TEN_NUCLEAR_MISSILES =
+            ComponentRegistry.getOrCreate(Observations.id("ten_nuclear_missiles"), TenNuclearMissilesComponent.class);
 
 
     @Override

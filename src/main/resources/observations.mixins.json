@@ -6,6 +6,7 @@
     "accessor.EntityAccessor",
     "accessor.LivingEntityAccessor",
     "everest.LivingEntityMixin",
+    "flow.EntityMixin",
     "hailey.PlayerEntityMixin",
     "kajo.LivingEntityMixin",
     "kajo.PlayerEntityMixin",

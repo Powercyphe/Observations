@@ -63,7 +63,7 @@ public class AgileComponent implements AutoSyncedComponent, CommonTickingCompone
         if (world.getBlockState(blockPos.down()).isOf(Blocks.AIR)) {
             boolean hasNonAirNeighbor = Direction.Type.HORIZONTAL.stream()
                     .map(blockPos::offset)
-                    .anyMatch(pos -> !world.getBlockState(pos).isOf(Blocks.AIR));
+                    .anyMatch(pos -> !world.getBlockState(pos).isOf(Blocks.AIR) && world.getBlockState(pos).isFullCube(world, pos));
 
             if (hasNonAirNeighbor) {
                 return true;
