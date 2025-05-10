@@ -19,6 +19,8 @@
     "pipo.PlayerEntityMixin",
     "pom.HungerManagerMixin",
     "pom.ItemStackMixin",
+    "pom.JumpMixin",
+    "pom.LivingEntityMixin",
     "rafsa.PlayerEntityMixin",
     "shiny.EntityMixin",
     "shiny.ItemStackMixin",

@@ -47,6 +47,10 @@ public class ModComponents implements EntityComponentInitializer {
             ComponentRegistry.getOrCreate(Observations.id("will"), WillToLiveOnComponent.class);
     public static final ComponentKey<TenNuclearMissilesComponent> TEN_NUCLEAR_MISSILES =
             ComponentRegistry.getOrCreate(Observations.id("ten_nuclear_missiles"), TenNuclearMissilesComponent.class);
+    public static final ComponentKey<FloatyComponent> FLOATY =
+            ComponentRegistry.getOrCreate(Observations.id("floaty"), FloatyComponent.class);
+    public static final ComponentKey<DenseComponent> DENSE =
+            ComponentRegistry.getOrCreate(Observations.id("dense"), DenseComponent.class);
 
 
     @Override
@@ -66,5 +70,8 @@ public class ModComponents implements EntityComponentInitializer {
         registry.registerForPlayers(COMFORTING_WARMTH, ComfortingWarmthComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
         registry.registerForPlayers(SQUISH ,SquishComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
         registry.registerForPlayers(WILL ,WillToLiveOnComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
+        registry.registerForPlayers(TEN_NUCLEAR_MISSILES ,TenNuclearMissilesComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
+        registry.registerForPlayers(FLOATY ,FloatyComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
+        registry.registerForPlayers(DENSE ,DenseComponent::new, RespawnCopyStrategy.ALWAYS_COPY);
     }
 }

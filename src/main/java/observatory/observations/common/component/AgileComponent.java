@@ -28,7 +28,6 @@ public class AgileComponent implements AutoSyncedComponent, CommonTickingCompone
         ModComponents.AGILE.sync(player);
     }
 
-
     @Override
     public void tick() {
         if (TraitComponent.get(player).hasTrait(Trait.AGILE) || TraitComponent.get(player).hasTrait(Trait.BANDIT)) {

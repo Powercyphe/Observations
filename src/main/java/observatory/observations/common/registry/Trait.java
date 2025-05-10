@@ -91,7 +91,7 @@ public enum Trait {
     // * Done
     SILK_SACK("In your inventory, you have a button on the right-side of your slots which you can click to open 6 extra slots. These slots are kept after death and can be hidden by pressing the button again."),
     // * Done
-    AGILE("You have extra mobility, you can stick to walls, climb up walls and wall-jump. In addition, you can jump higher.", TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25), TraitUtil.multiplyBaseModifier(AdditionalEntityAttributes.JUMP_HEIGHT, 1.0)),
+    AGILE("You have extra mobility, you can stick to walls, climb up walls and wall-jump. In addition, you can jump higher.", TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25), TraitUtil.multiplyBaseModifier(AdditionalEntityAttributes.JUMP_HEIGHT, 1.2)),
 
     // EVEREST
     // * Done
@@ -123,7 +123,7 @@ public enum Trait {
     // * Done
     LINE_OF_SIGHT("Players that are looked at will be highlighted for you."),
     // * Done
-    ACROBATICS("You have an increased movement speed and jump height.", TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25), TraitUtil.multiplyBaseModifier(AdditionalEntityAttributes.JUMP_HEIGHT, 1.1)),
+    ACROBATICS("You have an increased movement speed and jump height.", TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_MOVEMENT_SPEED, 0.25)),
 
     // SHINY
     // * Done
@@ -136,7 +136,11 @@ public enum Trait {
     // * Done
     FIVE_BIG_BOOMS("Upon falling below 50% health, a five-second countdown initiates; failure to defuse results in a catastrophic self-detonation."),
     // * Done (inside five big booms)
-    DEFUSAL("If the detonation timer is currently active jumping into water will cancel it.\n");
+    DEFUSAL("If the detonation timer is currently active jumping into water will cancel it."),
+
+    FLOATY("You have permanent Slow Falling and lower Gravity when jumping, in addition, if you stand completely still for 4 seconds you will begin to float upwards and stops when you start moving.\n"),
+    DENSE("You cannot stay in water for long, being thrust to the surface when underwater.\n"),
+    POPPING("You only have 8 hearts.", TraitUtil.multiplyBaseModifier(EntityAttributes.GENERIC_MAX_HEALTH, -0.2));
 
     private final String id;
     private final DefaultedList<Pair<EntityAttribute, EntityAttributeModifier>> attributes;

@@ -29,7 +29,9 @@
 			"observations:comforting_warmth",
 			"observations:squish",
 			"observations:will",
-			"observations:ten_nuclear_missiles"
+			"observations:ten_nuclear_missiles",
+			"observations:floaty",
+			"observations:dense"
 		]
 	},
 	"accessWidener": "observations.accesswidener",

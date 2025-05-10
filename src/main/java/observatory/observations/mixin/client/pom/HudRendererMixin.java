@@ -88,7 +88,7 @@ public abstract class HudRendererMixin {
 
         context.getMatrices().push();
         context.getMatrices().translate(0.0F, 0.0F, -90.0F);
-        context.getMatrices().scale(scaleX * 2, scaleY * 2, 1.0F);
+        context.getMatrices().scale(scaleX * 4, scaleY * 4, 1.0F);
 
         context.drawTexture(OVERLAY_TEXTURE, 0, 0, 0, 0, originalImageWidth, originalImageHeight, originalImageWidth, originalImageHeight);
 
